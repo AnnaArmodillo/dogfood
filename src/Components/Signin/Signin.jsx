@@ -1,9 +1,9 @@
-import signupStyle from './signup.module.css';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { signupValidationScheme } from './signupValidator';
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import { signinValidationScheme } from './signinValidator';
 import classNames from 'classnames';
+import signinStyle from './signin.module.css';
 
-export function Signup() {
+export function Signin() {
     function submitHandler(values) {
         console.log(values);
     }
@@ -11,49 +11,38 @@ export function Signup() {
         <Formik
             initialValues={{
                 email: 'email here',
-                group: 'sm9',
                 password: 'password here',
             }}
-            validationSchema={signupValidationScheme}
+            validationSchema={signinValidationScheme}
             onSubmit={submitHandler}
         >
             {(formik) => {
                 const { isValid } = formik;
                 return (
-                    <Form className={signupStyle.form}>
+                    <Form className={signinStyle.form}>
                         <Field
-                            className={signupStyle.field}
+                            className={signinStyle.field}
                             type='email'
                             name='email'
                         />
                         <ErrorMessage
-                            className={signupStyle.error}
+                            className={signinStyle.error}
                             name='email'
                             component='div'
                         />
                         <Field
-                            className={signupStyle.field}
-                            type='group'
-                            name='group'
-                        />
-                        <ErrorMessage
-                            className={signupStyle.error}
-                            name='group'
-                            component='div'
-                        />
-                        <Field
-                            className={signupStyle.field}
+                            className={signinStyle.field}
                             type='password'
                             name='password'
                         />
                         <ErrorMessage
-                            className={signupStyle.error}
+                            className={signinStyle.error}
                             name='password'
                             component='div'
                         />
                         <button
-                            className={classNames(signupStyle.button, {
-                                [signupStyle.disabled]: !isValid,
+                            className={classNames(signinStyle.button, {
+                                [signinStyle.disabled]: !isValid,
                             })}
                             type='submit'
                             disabled={!isValid}
