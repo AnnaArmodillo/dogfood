@@ -1,6 +1,7 @@
 import footerStyle from './footer.module.css';
 import logo from '../../Components/logo.jpg';
 import { NavLink } from 'react-router-dom';
+import classNames from 'classnames';
 
 export function Footer() {
     return (
@@ -83,11 +84,30 @@ export function Footer() {
                     dogfood.ru@gmail.com
                 </a>
                 <div className={footerStyle.logosWrapper}>
-                    <i className='fa-brands fa-telegram'></i>
-                    <i className="fa-brands fa-whatsapp"></i>
-                    <i className="fa-brands fa-viber"></i>
-                    <i className="fa-brands fa-square-instagram"></i>
-                    <i className="fa-brands fa-vk"></i>
+                    <i
+                        className={classNames(
+                            'fa-brands fa-telegram',
+                            footerStyle.logoLinks
+                        )}
+                    ></i>
+                    <i
+                        className={classNames(
+                            'fa-brands fa-whatsapp',
+                            footerStyle.logoLinks
+                        )}
+                    ></i>
+                    <i
+                        className={classNames('fa-brands fa-viber', footerStyle.logoLinks)}
+                    ></i>
+                    <i
+                        className={classNames(
+                            'fa-brands fa-square-instagram',
+                            footerStyle.logoLinks
+                        )}
+                    ></i>
+                    <i
+                        className={classNames('fa-brands fa-vk', footerStyle.logoLinks)}
+                    ></i>
                 </div>
             </div>
         </div>

@@ -80,3 +80,11 @@
 .email:hover {
   color: rgb(23, 23, 182);
 }
+
+.logoLinks {
+  cursor: pointer;
+}
+
+.logoLinks:hover {
+  color: rgb(23, 23, 182);
+}
