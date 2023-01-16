@@ -1,0 +1,74 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+  padding: 8px 40px;
+  background-color: rgb(250, 228, 105);
+  z-index: 9999;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 12px;
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  font-weight: 900;
+  font-size: 28px;
+  text-decoration: none;
+  color: black;
+}
+
+.copyright {
+  font-size: 12px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.link {
+  font-size: 12px;
+  text-decoration: none;
+  transition: all 0.5s ease;
+  color: black;
+}
+
+.link:hover {
+  color: rgb(14, 14, 160);
+  font-size: 16px;
+}
+
+.contactsWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.logoCopyright {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.email {
+  font-size: 16px;
+  font-weight: 400;
+  text-decoration: none;
+  color: black;
+}
+
+.logosWrapper {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+}

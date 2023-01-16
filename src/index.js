@@ -6,6 +6,7 @@ import App from './App';
 import { Signup } from './Components/Signup/Signup';
 import { Signin } from './Components/Signin/Signin';
 import { Main } from './Components/Main/Main';
+import { Products } from './Components/Products/Products';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
         element: <Signin />,
       },
       { index: true, element: <Main /> },
+      {
+        path: 'products',
+        element: <Products />,
+      },
     ],
   },
 ]);

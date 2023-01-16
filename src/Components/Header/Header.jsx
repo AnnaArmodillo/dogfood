@@ -4,46 +4,56 @@ import logo from '../../Components/logo.jpg';
 import headerStyle from './header.module.css';
 export function Header() {
     return (
-        <>
-            <ul className={headerStyle.header}>
-                <li>
-                    <NavLink
-                        className={headerStyle.logoWrapper}
-                        to='/'
-                    >
-                        <img
-                            className={headerStyle.logo}
-                            src={logo}
-                            alt='logo'
-                        />{' '}
-                        DogFood
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
-                        className={({ isActive }) =>
-                            classNames({ [headerStyle.activeLink]: isActive }, [
-                                headerStyle.link,
-                            ])
-                        }
-                        to='/signup'
-                    >
-                        Signup
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
-                        className={({ isActive }) =>
-                            classNames({ [headerStyle.activeLink]: isActive }, [
-                                headerStyle.link,
-                            ])
-                        }
-                        to='/signin'
-                    >
-                        Signin
-                    </NavLink>
-                </li>
-            </ul>
-        </>
+        <ul className={headerStyle.header}>
+            <li>
+                <NavLink
+                    className={headerStyle.logoWrapper}
+                    to='/'
+                >
+                    <img
+                        className={headerStyle.logo}
+                        src={logo}
+                        alt='logo'
+                    />{' '}
+                    DogFood
+                </NavLink>
+            </li>
+            <li>
+                <NavLink
+                    className={({ isActive }) =>
+                        classNames({ [headerStyle.activeLink]: isActive }, [
+                            headerStyle.link,
+                        ])
+                    }
+                    to='/products'
+                >
+                    Каталог
+                </NavLink>
+            </li>
+            <li>
+                <NavLink
+                    className={({ isActive }) =>
+                        classNames({ [headerStyle.activeLink]: isActive }, [
+                            headerStyle.link,
+                        ])
+                    }
+                    to='/signup'
+                >
+                    Регистрация
+                </NavLink>
+            </li>
+            <li>
+                <NavLink
+                    className={({ isActive }) =>
+                        classNames({ [headerStyle.activeLink]: isActive }, [
+                            headerStyle.link,
+                        ])
+                    }
+                    to='/signin'
+                >
+                    Вход
+                </NavLink>
+            </li>
+        </ul>
     );
 }
