@@ -11,6 +11,7 @@
   top: 0;
   left: 0;
   right: 0;
+  height: 72px;
 }
 
 .logo {
@@ -18,13 +19,12 @@
   height: 50px;
 }
 
-.header li:nth-child(3) {
+.header li:nth-child(2) {
   margin-left: auto;
 }
 
-.header li:nth-child(2) {
-  margin: auto;
-}
+/* .header li:nth-child(2) {
+} */
 
 .link {
   text-decoration: none;
@@ -59,7 +59,7 @@
   font-size: 24px;
   margin: 8px 0;
   border: none;
-  width: 300px;
+  width: 30vw;
   background-color: white;
   display: flex;
   position: relative;
@@ -74,9 +74,15 @@
   position: absolute;
   right: 16px;
   top: 8px;
+  cursor: pointer;
 }
 
 .search {
   text-align: center;
   width: 100%;
+}
+
+.searchOpenButton {
+  color: black;
+  cursor: pointer;
 }
