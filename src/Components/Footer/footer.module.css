@@ -4,7 +4,10 @@
   list-style-type: none;
   padding: 8px 40px;
   background-color: rgb(250, 228, 105);
-  z-index: 9999;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .logo {
@@ -38,11 +41,11 @@
   text-decoration: none;
   transition: all 0.5s ease;
   color: black;
+  font-weight: 500;
 }
 
 .link:hover {
-  color: rgb(14, 14, 160);
-  font-size: 16px;
+  color: rgb(23, 23, 182);
 }
 
 .contactsWrapper {
@@ -62,13 +65,18 @@
 
 .email {
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 500;
   text-decoration: none;
   color: black;
+  transition: all 0.5s ease;
 }
 
 .logosWrapper {
   margin-top: 12px;
   display: flex;
   gap: 8px;
+}
+
+.email:hover {
+  color: rgb(23, 23, 182);
 }

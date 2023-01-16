@@ -18,8 +18,12 @@
   height: 50px;
 }
 
-.header li:nth-child(2) {
+.header li:nth-child(3) {
   margin-left: auto;
+}
+
+.header li:nth-child(2) {
+  margin: auto;
 }
 
 .link {
@@ -27,6 +31,7 @@
   transition: all 0.5s ease;
   font-size: 20px;
   font-weight: 600;
+  color: black;
 }
 
 .link:hover {
@@ -45,4 +50,33 @@
 
 .activeLink {
   font-size: 24px;
+}
+
+.searchWrapper {
+  line-height: 32px;
+  padding: 4px;
+  border-radius: 32px;
+  font-size: 24px;
+  margin: 8px 0;
+  border: none;
+  width: 300px;
+  background-color: white;
+  display: flex;
+  position: relative;
+}
+
+.search:focus {
+  outline: none;
+}
+
+.searchCloseButton {
+  color: rgb(182, 178, 178);
+  position: absolute;
+  right: 16px;
+  top: 8px;
+}
+
+.search {
+  text-align: center;
+  width: 100%;
 }

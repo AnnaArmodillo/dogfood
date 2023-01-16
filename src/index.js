@@ -7,6 +7,14 @@ import { Signup } from './Components/Signup/Signup';
 import { Signin } from './Components/Signin/Signin';
 import { Main } from './Components/Main/Main';
 import { Products } from './Components/Products/Products';
+import { Favourite } from './Components/Favourite/Favourite';
+import { Sales } from './Components/Sales/Sales';
+import { News } from './Components/News/News';
+import { Comments } from './Components/Comments/Comments';
+import { Orders } from './Components/Orders/Orders';
+import { FAQ } from './Components/FAQ/FAQ';
+import { Contacts } from './Components/Contacts/Contacts';
+import { Feedback } from './Components/Feedback/Feedback';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +33,38 @@ const router = createBrowserRouter([
       {
         path: 'products',
         element: <Products />,
+      },
+      {
+        path: 'favourite',
+        element: <Favourite />,
+      },
+      {
+        path: 'sales',
+        element: <Sales />,
+      },
+      {
+        path: 'news',
+        element: <News />,
+      },
+      {
+        path: 'comments',
+        element: <Comments />,
+      },
+      {
+        path: 'orders',
+        element: <Orders />,
+      },
+      {
+        path: 'faq',
+        element: <FAQ />,
+      },
+      {
+        path: 'feedback',
+        element: <Feedback />,
+      },
+      {
+        path: 'contacts',
+        element: <Contacts />,
       },
     ],
   },

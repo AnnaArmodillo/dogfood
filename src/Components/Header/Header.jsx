@@ -19,15 +19,31 @@ export function Header() {
                 </NavLink>
             </li>
             <li>
+                <div className={headerStyle.searchWrapper}>
+                    <div
+                        contentEditable={true}
+                        suppressContentEditableWarning={true}
+                        className={headerStyle.search}
+                        type='text'
+                    ></div>
+                    <i
+                        className={classNames(
+                            'fa-solid fa-circle-xmark',
+                            headerStyle.searchCloseButton
+                        )}
+                    ></i>
+                </div>
+            </li>
+            <li>
                 <NavLink
                     className={({ isActive }) =>
                         classNames({ [headerStyle.activeLink]: isActive }, [
                             headerStyle.link,
                         ])
                     }
-                    to='/products'
+                    to='/favourite'
                 >
-                    Каталог
+                    <i className="fa-regular fa-heart"></i>
                 </NavLink>
             </li>
             <li>
