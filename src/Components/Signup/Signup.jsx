@@ -11,7 +11,7 @@ import signupStyle from './signup.module.css';
 import { signupValidationScheme } from './signupValidator';
 import { withQuery } from '../HOCs/withQuery';
 
-function Signupinner({ mutateAsync }) {
+function SignupInner({ mutateAsync }) {
   const navigate = useNavigate();
   const submitHandler = async (values) => {
     await mutateAsync(values);
@@ -68,7 +68,7 @@ function Signupinner({ mutateAsync }) {
               type="submit"
               disabled={!isValid}
             >
-              Отправить данные
+              Зарегистрироваться
             </button>
           </Form>
         );
@@ -76,7 +76,7 @@ function Signupinner({ mutateAsync }) {
     </Formik>
   );
 }
-const SignupWithQuery = withQuery(Signupinner);
+const SignupWithQuery = withQuery(SignupInner);
 export function Signup() {
   const { mutateAsync, isError, error } = useMutation({
     mutationFn: (values) => fetch('https://api.react-learning.ru/signup', {
