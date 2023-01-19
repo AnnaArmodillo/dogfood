@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import App from './App';
 import { Signup } from './Components/Signup/Signup';
 import { Signin } from './Components/Signin/Signin';
@@ -16,6 +17,7 @@ import { Orders } from './Components/Orders/Orders';
 import { FAQ } from './Components/FAQ/FAQ';
 import { Contacts } from './Components/Contacts/Contacts';
 import { Feedback } from './Components/Feedback/Feedback';
+import { AppContextProvider } from './Contexts/AppContextProvider';
 
 const router = createBrowserRouter([
   {
@@ -70,6 +72,12 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-
+const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<RouterProvider router={router} />);
+root.render(
+  <QueryClientProvider client={queryClient}>
+    <AppContextProvider>
+      <RouterProvider router={router} />
+    </AppContextProvider>
+  </QueryClientProvider>,
+);
