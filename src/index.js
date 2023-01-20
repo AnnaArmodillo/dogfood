@@ -6,7 +6,7 @@ import './index.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import App from './App';
 import { Signup } from './Components/Signup/Signup';
-import { Signin } from './Components/Signin/Signin';
+import { SigninMemo as Signin } from './Components/Signin/Signin';
 import { Main } from './Components/Main/Main';
 import { Products } from './Components/Products/Products';
 import { Favourite } from './Components/Favourite/Favourite';

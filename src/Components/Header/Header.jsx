@@ -1,18 +1,23 @@
 import classNames from 'classnames';
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { AppContext } from '../../Contexts/AppContextProvider';
 import logo from '../logo.jpg';
 import headerStyle from './header.module.css';
 
 export function Header() {
   console.log('render header');
+  const { token, setToken } = useContext(AppContext);
   const [isSearchActive, setIsSearchActive] = useState(false);
   function clickSearchHandler() {
     setIsSearchActive(true);
   }
   function closeSerachHandler() {
     setIsSearchActive(false);
+  }
+  function logoutHandler() {
+    setToken('');
   }
   return (
     <ul className={headerStyle.header}>
@@ -79,12 +84,13 @@ export function Header() {
       </li>
       <li>
         <NavLink
+          onClick={logoutHandler}
           className={({ isActive }) => classNames({ [headerStyle.activeLink]: isActive }, [
             headerStyle.link,
           ])}
           to="/signin"
         >
-          Вход
+          {token ? 'Выход' : 'Вход'}
         </NavLink>
       </li>
     </ul>

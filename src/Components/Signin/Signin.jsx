@@ -2,15 +2,20 @@ import {
   ErrorMessage, Field, Form, Formik,
 } from 'formik';
 import classNames from 'classnames';
-// eslint-disable-next-line no-unused-vars
-import React from 'react';
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
 import { signinValidationScheme } from './signinValidator';
 import signinStyle from './signin.module.css';
+import { withQuery } from '../HOCs/withQuery';
+import { AppContext } from '../../Contexts/AppContextProvider';
 
-export function Signin() {
-  function submitHandler(values) {
-    console.log(values);
-  }
+function SigninInner({ mutateAsync }) {
+  const navigate = useNavigate();
+  const submitHandler = async (values) => {
+    await mutateAsync(values);
+    navigate('/products');
+  };
   return (
     <Formik
       initialValues={{
@@ -18,7 +23,6 @@ export function Signin() {
         password: 'password here',
       }}
       validationSchema={signinValidationScheme}
-      // eslint-disable-next-line react/jsx-no-bind
       onSubmit={submitHandler}
     >
       {(formik) => {
@@ -52,7 +56,7 @@ export function Signin() {
               type="submit"
               disabled={!isValid}
             >
-              Отправить данные
+              Войти
             </button>
           </Form>
         );
@@ -60,3 +64,43 @@ export function Signin() {
     </Formik>
   );
 }
+const SigninWithQuery = withQuery(SigninInner);
+function Signin() {
+  console.log('render signin');
+  const { token, setToken } = useContext(AppContext);
+  console.log(token);
+  const {
+    mutateAsync, isError, error,
+  } = useMutation({
+    mutationFn: (values) => fetch('https://api.react-learning.ru/signin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(values),
+    }).then((res) => {
+      if (res.status === 401) {
+        throw new Error('Неверные логин или пароль');
+      } else if (res.status === 404) {
+        throw new Error('Пользователь с указанным email не найден');
+      } else if (res.status >= 300) {
+        throw new Error(`Ошибка, код ${res.status}`);
+      }
+      return res.json();
+    }).then((result) => {
+      setToken(result.token);
+    }),
+  });
+
+  return (
+    <SigninWithQuery
+      mutateAsync={mutateAsync}
+      isError={isError}
+      error={error}
+    />
+
+  );
+}
+export const SigninMemo = React.memo(Signin);
+
+// добавить лоадер в регистрацию и вход

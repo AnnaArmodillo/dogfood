@@ -4,3 +4,9 @@
   font-size: 20px;
   min-height: 100%;
 }
+
+.errorMessage {
+  font-size: 32px;
+  font-weight: 500;
+  color: rgb(124, 20, 41);
+}
