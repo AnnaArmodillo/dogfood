@@ -8,7 +8,7 @@ import { useMutation } from '@tanstack/react-query';
 import { signinValidationScheme } from './signinValidator';
 import signinStyle from './signin.module.css';
 import { withQuery } from '../HOCs/withQuery';
-import { AppContext } from '../../Contexts/AppContextProvider';
+import { AppContext, AppMethodsContext } from '../../Contexts/AppContextProvider';
 
 function SigninInner({ mutateAsync }) {
   const navigate = useNavigate();
@@ -69,10 +69,11 @@ function SigninInner({ mutateAsync }) {
 const SigninWithQuery = withQuery(SigninInner);
 function Signin() {
   console.log('render signin');
-  const { token, setToken } = useContext(AppContext);
+  const token = useContext(AppContext);
+  const setToken = useContext(AppMethodsContext);
   console.log(token);
   const {
-    mutateAsync, isError, error,
+    mutateAsync, isError, error, isLoading,
   } = useMutation({
     mutationFn: (values) => fetch('https://api.react-learning.ru/signin', {
       method: 'POST',
@@ -99,10 +100,9 @@ function Signin() {
       mutateAsync={mutateAsync}
       isError={isError}
       error={error}
+      isLoading={isLoading}
     />
 
   );
 }
 export const SigninMemo = React.memo(Signin);
-
-// добавить лоадер в регистрацию и вход

@@ -2,13 +2,14 @@ import classNames from 'classnames';
 // eslint-disable-next-line no-unused-vars
 import React, { useContext, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { AppContext } from '../../Contexts/AppContextProvider';
+import { AppContext, AppMethodsContext } from '../../Contexts/AppContextProvider';
 import logo from '../logo.jpg';
 import headerStyle from './header.module.css';
 
 export function Header() {
   console.log('render header');
-  const { token, setToken } = useContext(AppContext);
+  const token = useContext(AppContext);
+  const setToken = useContext(AppMethodsContext);
   const [isSearchActive, setIsSearchActive] = useState(false);
   function clickSearchHandler() {
     setIsSearchActive(true);

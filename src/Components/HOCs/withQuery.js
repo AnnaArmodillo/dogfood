@@ -1,5 +1,9 @@
+import { Loader } from '../Loader/Loader';
+
 // eslint-disable-next-line func-names
-export const withQuery = (WrappedComponent) => function ({ isError, error, ...rest }) {
+export const withQuery = (WrappedComponent) => function ({
+  isError, error, isLoading, ...rest
+}) {
   if (isError) {
     return (
       <>
@@ -10,6 +14,7 @@ export const withQuery = (WrappedComponent) => function ({ isError, error, ...re
       </>
     );
   }
+  if (isLoading) return <Loader />;
   return (
     <WrappedComponent {...rest} />
   );

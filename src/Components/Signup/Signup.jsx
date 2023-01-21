@@ -80,7 +80,9 @@ function SignupInner({ mutateAsync }) {
 }
 const SignupWithQuery = withQuery(SignupInner);
 export function Signup() {
-  const { mutateAsync, isError, error } = useMutation({
+  const {
+    mutateAsync, isError, error, isLoading,
+  } = useMutation({
     mutationFn: (values) => fetch('https://api.react-learning.ru/signup', {
       method: 'POST',
       headers: {
@@ -103,6 +105,7 @@ export function Signup() {
       mutateAsync={mutateAsync}
       isError={isError}
       error={error}
+      isLoading={isLoading}
     />
 
   );

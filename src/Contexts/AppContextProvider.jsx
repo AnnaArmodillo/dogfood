@@ -3,6 +3,7 @@ import {
 } from 'react';
 
 export const AppContext = createContext();
+export const AppMethodsContext = createContext();
 export function AppContextProvider({ children }) {
   const tokenFromStorage = localStorage.getItem('token');
   const [token, setToken] = useState(() => tokenFromStorage || '');
@@ -10,10 +11,13 @@ export function AppContextProvider({ children }) {
     localStorage.setItem('token', token);
   }, [token]);
   console.log(token);
+  const appMethods = setToken;
   return (
-    // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <AppContext.Provider value={{ token, setToken }}>
-      {children}
+
+    <AppContext.Provider value={token}>
+      <AppMethodsContext.Provider value={appMethods}>
+        {children}
+      </AppMethodsContext.Provider>
     </AppContext.Provider>
   );
 }
