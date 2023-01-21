@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 // eslint-disable-next-line no-unused-vars
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AppContext } from '../../Contexts/AppContextProvider';
 import logo from '../logo.jpg';
@@ -82,17 +82,31 @@ export function Header() {
           Регистрация
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          onClick={logoutHandler}
-          className={({ isActive }) => classNames({ [headerStyle.activeLink]: isActive }, [
-            headerStyle.link,
-          ])}
-          to="/signin"
-        >
-          {token ? 'Выход' : 'Вход'}
-        </NavLink>
-      </li>
+      {token ? (
+        <li>
+          <NavLink
+            onClick={logoutHandler}
+            className={({ isActive }) => classNames({ [headerStyle.activeLink]: isActive }, [
+              headerStyle.link,
+            ])}
+            to="/signin"
+          >
+            Выход
+          </NavLink>
+        </li>
+      ) : (
+        <li>
+          <NavLink
+            onClick={logoutHandler}
+            className={({ isActive }) => classNames({ [headerStyle.activeLink]: isActive }, [
+              headerStyle.link,
+            ])}
+            to="/signin"
+          >
+            Вход
+          </NavLink>
+        </li>
+      )}
     </ul>
   );
 }

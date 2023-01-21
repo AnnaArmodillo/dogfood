@@ -20,9 +20,9 @@ function SignupInner({ mutateAsync }) {
   return (
     <Formik
       initialValues={{
-        email: 'email here',
+        email: '',
         group: 'sm9',
-        password: 'password here',
+        password: '',
       }}
       validationSchema={signupValidationScheme}
       onSubmit={submitHandler}
@@ -35,6 +35,7 @@ function SignupInner({ mutateAsync }) {
               className={signupStyle.field}
               type="email"
               name="email"
+              placeholder="email"
             />
             <ErrorMessage
               className={signupStyle.error}
@@ -55,6 +56,7 @@ function SignupInner({ mutateAsync }) {
               className={signupStyle.field}
               type="password"
               name="password"
+              placeholder="пароль"
             />
             <ErrorMessage
               className={signupStyle.error}
