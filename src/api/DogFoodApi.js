@@ -62,7 +62,6 @@ class DogFoodApi {
   }
 
   async getAllProducts() {
-    this.checkToken();
     const res = await fetch(`${this.baseURL}/products`, {
       headers: {
         authorization: this.getAuthorizationHeader(), 'Content-Type': 'application/json',

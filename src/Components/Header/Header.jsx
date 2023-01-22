@@ -21,7 +21,7 @@ export function Header() {
   function logoutHandler() {
     setToken('');
     setUserID('');
-    clearClient();
+    setTimeout(clearClient);
   }
   return (
     <ul className={headerStyle.header}>
