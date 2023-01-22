@@ -1,0 +1,77 @@
+.card {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 8px;
+    flex-direction: column;
+    position: relative;
+}
+
+.title {
+    text-align: left;
+    font-size: 16px;
+}
+
+.photo img {
+    height: 100px;
+    max-width: 80%;
+    margin: auto;
+}
+
+.photo {
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.price {
+    font-size: 16px;
+}
+
+.buttonBuy {
+background-color: rgb(250, 228, 105);
+padding: 8px;
+border-radius: 16px;
+border: none;
+font-weight: 600;
+margin-top: 8px;
+cursor: pointer;
+}
+
+.wight {
+    font-size: 12px;
+}
+
+.discount {
+    background-color: rgba(255, 0, 0, 0.7);
+    border-radius: 12px;
+    padding: 4px;
+    line-height: 24px;
+    font-weight: 500;
+}
+
+.cardTop {
+display: flex;
+justify-content: center;
+align-items: flex-start;
+}
+
+.like {
+    color: red;
+    position: absolute;
+    right: 8px;
+}
+
+.new {
+    background-color: rgba(75, 167, 238, 0.7);
+    border-radius: 12px;
+    padding: 4px;
+    line-height: 24px;
+    font-weight: 500;
+}
+
+.tagsWrapper {
+    position: absolute;
+    gap: 4px;
+    display: flex;
+}

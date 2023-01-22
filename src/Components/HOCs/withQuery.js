@@ -6,12 +6,9 @@ export const withQuery = (WrappedComponent) => function ({
 }) {
   if (isError) {
     return (
-      <>
-        <WrappedComponent {...rest} />
-        <div className="errorMessage">
-          {error.message}
-        </div>
-      </>
+      <div className="errorMessage">
+        {error.message}
+      </div>
     );
   }
   if (isLoading) return <Loader />;

@@ -3,19 +3,18 @@ import {
   Formik, Form, Field, ErrorMessage,
 } from 'formik';
 import classNames from 'classnames';
-// eslint-disable-next-line no-unused-vars
-import React from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import signupStyle from './signup.module.css';
 import { signupValidationScheme } from './signupValidator';
 import { withQuery } from '../HOCs/withQuery';
+import { dogFoodApi } from '../../api/DogFoodApi';
 
 function SignupInner({ mutateAsync }) {
   const navigate = useNavigate();
   const submitHandler = async (values) => {
     await mutateAsync(values);
-    navigate('/signin');
+    setTimeout(() => navigate('/signin'));
   };
   return (
     <Formik
@@ -80,24 +79,11 @@ function SignupInner({ mutateAsync }) {
 }
 const SignupWithQuery = withQuery(SignupInner);
 export function Signup() {
+  console.log('render signup');
   const {
     mutateAsync, isError, error, isLoading,
   } = useMutation({
-    mutationFn: (values) => fetch('https://api.react-learning.ru/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(values),
-    }).then((res) => {
-      if (res.status === 409) {
-        throw new Error('Юзер с указанным email уже существует');
-      } else if (res.status === 400) {
-        throw new Error('Некорректно заполнено одно из полей');
-      } else if (res.status >= 300) {
-        throw new Error(`Ошибка, код ${res.status}`);
-      }
-    }),
+    mutationFn: (values) => dogFoodApi.signup(values),
   });
 
   return (

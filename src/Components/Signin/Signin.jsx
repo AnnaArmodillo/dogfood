@@ -8,13 +8,14 @@ import { useMutation } from '@tanstack/react-query';
 import { signinValidationScheme } from './signinValidator';
 import signinStyle from './signin.module.css';
 import { withQuery } from '../HOCs/withQuery';
-import { AppContext, AppMethodsContext } from '../../Contexts/AppContextProvider';
+import { AppSetContext } from '../../Contexts/AppContextProvider';
+import { dogFoodApi } from '../../api/DogFoodApi';
 
 function SigninInner({ mutateAsync }) {
   const navigate = useNavigate();
   const submitHandler = async (values) => {
     await mutateAsync(values);
-    navigate('/products');
+    setTimeout(() => navigate('/products'));
   };
   return (
     <Formik
@@ -69,30 +70,15 @@ function SigninInner({ mutateAsync }) {
 const SigninWithQuery = withQuery(SigninInner);
 function Signin() {
   console.log('render signin');
-  const token = useContext(AppContext);
-  const setToken = useContext(AppMethodsContext);
-  console.log(token);
+  const { setToken, setUserID } = useContext(AppSetContext);
   const {
     mutateAsync, isError, error, isLoading,
   } = useMutation({
-    mutationFn: (values) => fetch('https://api.react-learning.ru/signin', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(values),
-    }).then((res) => {
-      if (res.status === 401) {
-        throw new Error('Неверные логин или пароль');
-      } else if (res.status === 404) {
-        throw new Error('Пользователь с указанным email не найден');
-      } else if (res.status >= 300) {
-        throw new Error(`Ошибка, код ${res.status}`);
-      }
-      return res.json();
-    }).then((result) => {
-      setToken(result.token);
-    }),
+    mutationFn: (values) => dogFoodApi.signin(values)
+      .then((result) => {
+        setToken(result.token);
+        setUserID(result.data['_id']);
+      }),
   });
 
   return (
