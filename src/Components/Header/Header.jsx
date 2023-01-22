@@ -1,4 +1,4 @@
-import { useQueryClient } from '@tanstack/react-query';
+import { QueryClientProvider, useQueryClient } from '@tanstack/react-query';
 import classNames from 'classnames';
 import { useContext, useState } from 'react';
 import { NavLink } from 'react-router-dom';
@@ -10,6 +10,7 @@ export function Header() {
   console.log('render header');
   const { token } = useContext(AppContext);
   const { setToken, setUserID } = useContext(AppSetContext);
+  const { clearClient } = useQueryClient(QueryClientProvider);
   const [isSearchActive, setIsSearchActive] = useState(false);
   function clickSearchHandler() {
     setIsSearchActive(true);
@@ -20,9 +21,7 @@ export function Header() {
   function logoutHandler() {
     setToken('');
     setUserID('');
-    useQueryClient.invalidateQueries({
-      queryKey: ['products'],
-    });
+    clearClient();
   }
   return (
     <ul className={headerStyle.header}>
