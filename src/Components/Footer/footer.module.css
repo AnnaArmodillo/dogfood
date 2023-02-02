@@ -4,6 +4,7 @@
   list-style-type: none;
   padding: 8px 40px;
   background-color: rgb(250, 228, 105);
+  width: calc(100% - 80px);
 }
 
 .logo {
