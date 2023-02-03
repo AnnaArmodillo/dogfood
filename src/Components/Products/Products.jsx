@@ -1,22 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { dogFoodApi } from '../../api/DogFoodApi';
 import { ProductItem } from '../ProductItem/ProductItem';
 import productsStyle from './products.module.css';
-// import { withQuery } from '../HOCs/withQuery';
-import { AppContext } from '../../Contexts/AppContextProvider';
 import { Loader } from '../Loader/Loader';
+import { getTokenSelector } from '../../redux/slices/tokenSlice';
 
-// function ProductsInner({ data }) {
-
-// }
-// const ProductsWithQuery = withQuery(ProductsInner);
 export function Products() {
   console.log('render products');
   const navigate = useNavigate();
-  const { token } = useContext(AppContext);
+  const token = useSelector(getTokenSelector);
   if (token) {
+    dogFoodApi.setToken(token);
     const {
       data, isLoading, isError, error,
     } = useQuery({
@@ -32,10 +29,11 @@ export function Products() {
       );
     }
     const { products } = data;
-    if (!products.length) {
+    if (products && !products.length) {
       return <p>Список пуст</p>;
     }
-    return (
+    return ({ products }
+      && (
       <div className={productsStyle.products}>
         {products.map((product) => (
           <ProductItem
@@ -50,6 +48,7 @@ export function Products() {
           />
         ))}
       </div>
+      )
     );
   }
   useEffect(() => { navigate('/signin'); });

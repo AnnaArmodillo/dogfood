@@ -25,5 +25,7 @@ module.exports = {
     'jsx-a11y/no-static-element-interactions': 0,
     'react/jsx-no-bind': 0,
     'dot-notation': 0,
+    'default-param-last': 0,
+    'no-param-reassign': 0,
   },
 };

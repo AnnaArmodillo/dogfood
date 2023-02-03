@@ -1,26 +1,28 @@
 import { QueryClientProvider, useQueryClient } from '@tanstack/react-query';
 import classNames from 'classnames';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { AppContext, AppSetContext } from '../../Contexts/AppContextProvider';
+import { clearToken, getTokenSelector } from '../../redux/slices/tokenSlice';
+import { clearUserID } from '../../redux/slices/userIDSlice';
 import logo from '../logo.jpg';
 import headerStyle from './header.module.css';
 
 export function Header() {
   console.log('render header');
-  const { token } = useContext(AppContext);
-  const { setToken, setUserID } = useContext(AppSetContext);
+  const dispatch = useDispatch();
+  const token = useSelector(getTokenSelector);
   const { clearClient } = useQueryClient(QueryClientProvider);
   const [isSearchActive, setIsSearchActive] = useState(false);
   function clickSearchHandler() {
     setIsSearchActive(true);
   }
-  function closeSerachHandler() {
+  function closeSearchHandler() {
     setIsSearchActive(false);
   }
   function logoutHandler() {
-    setToken('');
-    setUserID('');
+    dispatch((clearToken()));
+    dispatch((clearUserID()));
     setTimeout(clearClient);
   }
   return (
@@ -49,7 +51,7 @@ export function Header() {
               type="text"
             />
             <i
-              onClick={closeSerachHandler}
+              onClick={closeSearchHandler}
               className={classNames(
                 'fa-solid fa-circle-xmark',
                 headerStyle.searchCloseButton,

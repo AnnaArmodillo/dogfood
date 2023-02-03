@@ -1,5 +1,5 @@
-import { useContext } from 'react';
-import { AppContext } from '../../Contexts/AppContextProvider';
+import { useSelector } from 'react-redux';
+import { getUserIDSelector } from '../../redux/slices/userIDSlice';
 import productItemStyle from './productItem.module.css';
 
 export function ProductItem({
@@ -11,7 +11,7 @@ export function ProductItem({
   tags,
   likes,
 }) {
-  const { userID } = useContext(AppContext);
+  const userID = useSelector(getUserIDSelector);
   return (
     <div className={productItemStyle.card}>
       <div className={productItemStyle.tagsWrapper}>

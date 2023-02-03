@@ -2,14 +2,16 @@ import {
   ErrorMessage, Field, Form, Formik,
 } from 'formik';
 import classNames from 'classnames';
-import React, { useContext } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
+import { useDispatch } from 'react-redux';
 import { signinValidationScheme } from './signinValidator';
 import signinStyle from './signin.module.css';
 import { withQuery } from '../HOCs/withQuery';
-import { AppSetContext } from '../../Contexts/AppContextProvider';
 import { dogFoodApi } from '../../api/DogFoodApi';
+import { setToken } from '../../redux/slices/tokenSlice';
+import { setUserID } from '../../redux/slices/userIDSlice';
 
 function SigninInner({ mutateAsync }) {
   const navigate = useNavigate();
@@ -70,14 +72,16 @@ function SigninInner({ mutateAsync }) {
 const SigninWithQuery = withQuery(SigninInner);
 function Signin() {
   console.log('render signin');
-  const { setToken, setUserID } = useContext(AppSetContext);
+  const dispatch = useDispatch();
   const {
     mutateAsync, isError, error, isLoading,
   } = useMutation({
     mutationFn: (values) => dogFoodApi.signin(values)
       .then((result) => {
-        setToken(result.token);
-        setUserID(result.data['_id']);
+        dispatch((setToken(result.token)));
+        dispatch((setUserID(result.data['_id'])));
+        dogFoodApi.setToken(result.token);
+        dogFoodApi.setUserID(result.data['_id']);
       }),
   });
 
