@@ -3,15 +3,18 @@ import classNames from 'classnames';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { getCartSelector } from '../../redux/slices/cartSlice';
 import { clearToken, getTokenSelector } from '../../redux/slices/tokenSlice';
 import { clearUserID } from '../../redux/slices/userIDSlice';
 import logo from '../logo.jpg';
+import { Search } from '../Search/Search';
 import headerStyle from './header.module.css';
 
 export function Header() {
   console.log('render header');
   const dispatch = useDispatch();
   const token = useSelector(getTokenSelector);
+  const cart = useSelector(getCartSelector);
   const { clearClient } = useQueryClient(QueryClientProvider);
   const [isSearchActive, setIsSearchActive] = useState(false);
   function clickSearchHandler() {
@@ -43,21 +46,7 @@ export function Header() {
       </li>
       <li>
         {isSearchActive ? (
-          <div className={headerStyle.searchWrapper}>
-            <div
-              contentEditable
-              suppressContentEditableWarning
-              className={headerStyle.search}
-              type="text"
-            />
-            <i
-              onClick={closeSearchHandler}
-              className={classNames(
-                'fa-solid fa-circle-xmark',
-                headerStyle.searchCloseButton,
-              )}
-            />
-          </div>
+          <Search closeSearchHandler={closeSearchHandler} />
         ) : (
           <i
             onClick={clickSearchHandler}
@@ -76,6 +65,17 @@ export function Header() {
           to="/favourite"
         >
           <i className="fa-regular fa-heart" />
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className={({ isActive }) => classNames({ [headerStyle.activeLink]: isActive }, [
+            headerStyle.link, headerStyle.cartWrapper,
+          ])}
+          to="/cart"
+        >
+          <i className="fa-solid fa-cart-shopping" />
+          <div className={headerStyle.productsQuantity}>{token ? (cart.length || '') : '' }</div>
         </NavLink>
       </li>
       <li>

@@ -17,6 +17,7 @@ import { FAQ } from './Components/FAQ/FAQ';
 import { Contacts } from './Components/Contacts/Contacts';
 import { Feedback } from './Components/Feedback/Feedback';
 import { store } from './redux/store';
+import { Cart } from './Components/Cart/Cart';
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: 'favourite',
         element: <Favourite />,
+      },
+      {
+        path: 'cart',
+        element: <Cart />,
       },
       {
         path: 'sales',
@@ -83,10 +88,12 @@ function clearClient() {
     queryKey: ['allProducts'],
   });
 }
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <QueryClientProvider client={queryClient} clearClient={clearClient}>
+  <QueryClientProvider
+    client={queryClient}
+    clearClient={clearClient}
+  >
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>

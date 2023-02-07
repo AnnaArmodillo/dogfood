@@ -1,6 +1,10 @@
 export const initState = {
   token: '',
   userID: '',
+  cart: [],
+  filter: {
+    search: '',
+  },
 };
 
 export function getInitState() {

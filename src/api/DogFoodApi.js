@@ -61,8 +61,8 @@ class DogFoodApi {
     }
   }
 
-  async getAllProducts() {
-    const res = await fetch(`${this.baseURL}/products`, {
+  async getAllProducts(search) {
+    const res = await fetch(`${this.baseURL}/products?q=${search}`, {
       headers: {
         authorization: this.getAuthorizationHeader(), 'Content-Type': 'application/json',
       },
@@ -75,8 +75,15 @@ class DogFoodApi {
     this.checkToken();
   }
 
-  async getProductsByIDs() {
+  getProductsByIDs(ids) {
     this.checkToken();
+    return Promise.all(ids.map((id) => fetch(`${this.baseURL}/products/${id}`, {
+      headers: {
+        authorization: this.getAuthorizationHeader(), 'Content-Type': 'application/json',
+      },
+      groupId: this.group,
+    })
+      .then((res) => res.json())));
   }
 }
 

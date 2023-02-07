@@ -27,5 +27,6 @@ module.exports = {
     'dot-notation': 0,
     'default-param-last': 0,
     'no-param-reassign': 0,
+    'jsx-a11y/label-has-associated-control': 0,
   },
 };

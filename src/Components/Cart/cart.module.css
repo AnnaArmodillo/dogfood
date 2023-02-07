@@ -1,0 +1,85 @@
+.cart {
+  margin: 100px 40px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.products {
+  width: 100%;
+  gap: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.order {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-left: 20px;
+  align-self: center;
+  gap: 20px;
+}
+
+.productsWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkAll {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.quantity,
+.totalPrice {
+  text-align: left;
+}
+
+.emptyCartBlock {
+  margin: 150px auto;
+  font-weight: 600;
+  font-size: 40px;
+}
+
+.errorMessage {
+  font-size: 32px;
+  font-weight: 500;
+  color: rgb(124, 20, 41);
+  margin: 100px auto;
+}
+
+.buttonBuy {
+  background-color: rgb(250, 228, 105);
+  border: none;
+  border-radius: 16px;
+  padding: 8px;
+  font-size: 24px;
+  width: 100%;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.buttonBuy:hover {
+  font-size: 28px;
+  box-shadow: 4px 4px 2px rgb(189, 165, 33);
+}
+
+.linksWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.link {
+  text-decoration: none;
+  transition: all 0.5s ease;
+  font-size: 20px;
+  font-weight: 600;
+  color: black;
+}
+
+.link:hover {
+  color: rgb(14, 14, 160);
+  font-size: 24px;
+}

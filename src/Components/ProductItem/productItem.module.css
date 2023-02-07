@@ -24,7 +24,7 @@
     margin-top: 20px;
 }
 
-.price {
+.totalPrice {
     font-size: 16px;
 }
 
@@ -74,4 +74,9 @@ align-items: flex-start;
     position: absolute;
     gap: 4px;
     display: flex;
+}
+
+.price {
+    text-decoration: line-through;
+    font-size: 12px;
 }

@@ -1,0 +1,98 @@
+.card {
+    display: flex;
+    justify-content: left;
+    align-items: flex-start;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.title {
+    text-align: left;
+    font-size: 16px;
+}
+
+.photo img {
+    height: 100px;
+    max-width: 80%;
+    margin: auto;
+}
+
+.photo {
+    text-align: center;
+}
+
+.totalCost {
+    font-size: 16px;
+    text-align: left;
+}
+
+.wight {
+    font-size: 12px;
+}
+
+.discount {
+    background-color: rgba(255, 0, 0, 0.7);
+    border-radius: 12px;
+    padding: 4px;
+    line-height: 24px;
+    font-weight: 500;
+    width: fit-content;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.quantityWrapper {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border: 2px solid rgb(250, 228, 105);
+    border-radius: 8px;
+    padding: 4px;
+}
+
+.quantityButton {
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+
+.deleteButton {
+    text-align: center;
+    background-color: white;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.buttonsWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.price {
+    font-size: 12px;
+}
+
+.quantityButton[disabled] {
+    cursor: auto;
+}
+
+.cost {
+    text-decoration: line-through;
+    font-size: 12px;
+    text-align: left;
+}
+
+.costWrapper {
+display: flex;
+flex-direction: column;
+width: 10%;
+}
