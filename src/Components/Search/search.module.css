@@ -3,29 +3,33 @@
     padding: 4px;
     border-radius: 32px;
     font-size: 24px;
-    margin: 8px 0;
+    margin: 100px auto 20px;
     border: none;
-    width: 30vw;
+    width: 50%;
     background-color: white;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
   }
   
   .search:focus {
     outline: none;
   }
   
-  .searchCloseButton {
+  .searchClearButton {
     color: rgb(182, 178, 178);
     cursor: pointer;
-  }
-  
-  .search {
-    text-align: center;
-    width: 100%;
+    position: absolute;
+    right: 20px;
   }
   
   .inputSearch {
-  outline: none;
-  border: none;
+    line-height: 20px;
+    text-align: center;
+    padding: 4px;
+    border-radius: 24px;
+    font-size: 24px;
+    margin: 8px 0;
+    width: 100%;
   }

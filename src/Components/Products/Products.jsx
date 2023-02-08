@@ -11,6 +11,7 @@ import { getSearchSelector } from '../../redux/slices/filterSlice';
 import { getQueryKey } from './helper';
 // eslint-disable-next-line no-unused-vars
 import { Filters } from '../Filters/Filters';
+import { Search } from '../Search/Search';
 
 export function Products() {
   console.log('render products');
@@ -39,6 +40,7 @@ export function Products() {
   }
   return (
     <>
+      <Search />
       <Filters />
       {products[0] && (
       <div className={productsStyle.products}>

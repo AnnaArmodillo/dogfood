@@ -1,14 +1,11 @@
 import { QueryClientProvider, useQueryClient } from '@tanstack/react-query';
 import classNames from 'classnames';
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { getCartSelector } from '../../redux/slices/cartSlice';
-import { getSearchSelector } from '../../redux/slices/filterSlice';
 import { clearToken, getTokenSelector } from '../../redux/slices/tokenSlice';
 import { clearUserID } from '../../redux/slices/userIDSlice';
 import logo from '../logo.jpg';
-import { Search } from '../Search/Search';
 import headerStyle from './header.module.css';
 
 export function Header() {
@@ -16,15 +13,7 @@ export function Header() {
   const dispatch = useDispatch();
   const token = useSelector(getTokenSelector);
   const cart = useSelector(getCartSelector);
-  const search = useSelector(getSearchSelector);
   const { clearClient } = useQueryClient(QueryClientProvider);
-  const [isSearchActive, setIsSearchActive] = useState(!!search);
-  function clickSearchHandler() {
-    setIsSearchActive(true);
-  }
-  function closeSearchHandler() {
-    setIsSearchActive(false);
-  }
   function logoutHandler() {
     dispatch((clearToken()));
     dispatch((clearUserID()));
@@ -45,19 +34,6 @@ export function Header() {
           {' '}
           DogFood
         </NavLink>
-      </li>
-      <li>
-        {isSearchActive ? (
-          <Search closeSearchHandler={closeSearchHandler} />
-        ) : (
-          <i
-            onClick={clickSearchHandler}
-            className={classNames(
-              'fa-solid fa-magnifying-glass',
-              headerStyle.searchOpenButton,
-            )}
-          />
-        )}
       </li>
       <li>
         <NavLink

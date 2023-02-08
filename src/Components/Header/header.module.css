@@ -49,41 +49,6 @@
   font-size: 24px;
 }
 
-.searchWrapper {
-  line-height: 32px;
-  padding: 4px;
-  border-radius: 32px;
-  font-size: 24px;
-  margin: 8px 0;
-  border: none;
-  width: 30vw;
-  background-color: white;
-  display: flex;
-  position: relative;
-}
-
-.search:focus {
-  outline: none;
-}
-
-.searchCloseButton {
-  color: rgb(182, 178, 178);
-  position: absolute;
-  right: 16px;
-  top: 8px;
-  cursor: pointer;
-}
-
-.search {
-  text-align: center;
-  width: 100%;
-}
-
-.searchOpenButton {
-  color: black;
-  cursor: pointer;
-}
-
 .cartWrapper {
   display: flex;
   position: relative;

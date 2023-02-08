@@ -1,8 +1,8 @@
 .filterButton {
-    border-radius: 32px;
-    font-size: 24px;
+    border-radius: 24px;
+    font-size: 16px;
     cursor: pointer;
-    line-height: 32px;
+    line-height: 20px;
     padding: 12px;
     background-color: rgb(250, 228, 105);
     font-weight: 600;
@@ -11,6 +11,6 @@
   }
 
   .filterButtonActive {
-    font-size: 28px;
+    font-size: 20px;
     box-shadow: 4px 4px 2px rgb(189, 165, 33);
   }

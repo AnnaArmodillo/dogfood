@@ -6,7 +6,7 @@ import { useDebounce } from '../../hooks/useDebounce';
 import { changeSearchFilter } from '../../redux/slices/filterSlice';
 import searchStyle from './search.module.css';
 
-export function Search({ closeSearchHandler }) {
+export function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [search, setSearch] = useState(() => {
     const searchValueFromQuery = searchParams.get('q');
@@ -14,6 +14,13 @@ export function Search({ closeSearchHandler }) {
   });
   const dispatch = useDispatch();
   const debouncedSearchValue = useDebounce(search, 1000);
+  function clearSearchHandler() {
+    setSearch('');
+    setSearchParams({
+      ...Object.fromEntries(searchParams.entries()),
+      q: '',
+    });
+  }
   function changeSearchHandler(event) {
     const newSearchValue = event.target.value;
     setSearch(newSearchValue);
@@ -35,10 +42,11 @@ export function Search({ closeSearchHandler }) {
         onChange={changeSearchHandler}
       />
       <i
-        onClick={closeSearchHandler}
+        onClick={clearSearchHandler}
+        title="Сбросить поиск"
         className={classNames(
           'fa-solid fa-circle-xmark',
-          searchStyle.searchCloseButton,
+          searchStyle.searchClearButton,
         )}
       />
     </div>

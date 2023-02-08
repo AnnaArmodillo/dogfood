@@ -13,15 +13,12 @@ export function Filters() {
         filterName,
       });
     } else {
-      console.log('2');
-      console.log(Object.fromEntries(searchParams.entries()));
       setSearchParams({
         ...Object.fromEntries(searchParams.entries()),
         filterName: '',
       });
     }
   }
-  console.log(Object.fromEntries(searchParams.entries()));
   return (
     <div className={FiltersStyle.filtersWrapper}>
       {FILTERS.map((filterName) => (
