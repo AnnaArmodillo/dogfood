@@ -1,25 +1,22 @@
 class DogFoodApi {
   constructor({ baseURL }) {
     this.baseURL = baseURL;
-    this.token = '';
     this.group = 'sm9';
     this.userID = '';
-  }
-
-  setToken(token) {
-    this.token = token;
   }
 
   setUserID(userID) {
     this.userID = userID;
   }
 
-  getAuthorizationHeader() {
-    return `Bearer ${this.token}`;
+  // eslint-disable-next-line class-methods-use-this
+  getAuthorizationToken(token) {
+    return `Bearer ${token}`;
   }
 
-  checkToken() {
-    if (!this.token) throw new Error('Отсутствует токен');
+  // eslint-disable-next-line class-methods-use-this
+  checkToken(token) {
+    if (!token) throw new Error('Отсутствует токен');
   }
 
   async signin(values) {
@@ -61,30 +58,41 @@ class DogFoodApi {
     }
   }
 
-  async getAllProducts(search) {
-    const res = await fetch(`${this.baseURL}/products?q=${search}`, {
+  async getAllProducts(search, token) {
+    this.checkToken(token);
+    const res = await fetch(`${this.baseURL}/products/search?query=${search}`, {
       headers: {
-        authorization: this.getAuthorizationHeader(), 'Content-Type': 'application/json',
+        authorization: this.getAuthorizationToken(token),
+        'Content-Type': 'application/json',
       },
       groupId: this.group,
     });
+    if (res.status >= 400) {
+      throw new Error(
+        `Ошибка, код ${res.status}`,
+      );
+    }
     return res.json();
   }
 
-  async getProductByID() {
-    this.checkToken();
+  async getProductByID(token) {
+    this.checkToken(token);
   }
 
-  getProductsByIDs(ids) {
-    this.checkToken();
-    return Promise.all(ids.map((id) => fetch(`${this.baseURL}/products/${id}`, {
-      headers: {
-        authorization: this.getAuthorizationHeader(), 'Content-Type': 'application/json',
-      },
-      groupId: this.group,
-    })
-      .then((res) => res.json())));
+  getProductsByIDs(ids, token) {
+    this.checkToken(token);
+    return Promise.all(
+      ids.map((id) => fetch(`${this.baseURL}/products/${id}`, {
+        headers: {
+          authorization: this.getAuthorizationToken(token),
+          'Content-Type': 'application/json',
+        },
+        groupId: this.group,
+      }).then((res) => res.json())),
+    );
   }
 }
 
-export const dogFoodApi = new DogFoodApi({ baseURL: 'https://api.react-learning.ru' });
+export const dogFoodApi = new DogFoodApi({
+  baseURL: 'https://api.react-learning.ru',
+});

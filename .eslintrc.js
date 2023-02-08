@@ -4,7 +4,12 @@ module.exports = {
     es2021: true,
   },
   extends: ['plugin:react/recommended', 'airbnb'],
-  overrides: [],
+  overrides: [
+    {
+      files: ['src/redux/slices/*Slice.js'],
+      rules: { 'no-param-reassign': ['error', { props: false }] },
+    },
+  ],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
@@ -25,8 +30,6 @@ module.exports = {
     'jsx-a11y/no-static-element-interactions': 0,
     'react/jsx-no-bind': 0,
     'dot-notation': 0,
-    'default-param-last': 0,
-    'no-param-reassign': 0,
     'jsx-a11y/label-has-associated-control': 0,
   },
 };

@@ -10,8 +10,8 @@ import { signinValidationScheme } from './signinValidator';
 import signinStyle from './signin.module.css';
 import { withQuery } from '../HOCs/withQuery';
 import { dogFoodApi } from '../../api/DogFoodApi';
-import { setToken } from '../../redux/slices/tokenSlice';
 import { setUserID } from '../../redux/slices/userIDSlice';
+import { setToken } from '../../redux/slices/tokenSlice';
 
 function SigninInner({ mutateAsync }) {
   const navigate = useNavigate();
@@ -80,7 +80,6 @@ function Signin() {
       .then((result) => {
         dispatch((setToken(result.token)));
         dispatch((setUserID(result.data['_id'])));
-        dogFoodApi.setToken(result.token);
         dogFoodApi.setUserID(result.data['_id']);
       }),
   });

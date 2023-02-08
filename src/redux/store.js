@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { dogFoodApi } from '../api/DogFoodApi';
 import { getInitState } from './initState';
 import { cartReducer } from './slices/cartSlice';
 import { filterReducer } from './slices/filterSlice';
@@ -18,5 +17,4 @@ export const store = configureStore({
 
 store.subscribe(() => {
   localStorage.setItem('REDUX_LS_KEY', JSON.stringify(store.getState()));
-  dogFoodApi.setToken(store.getState());
 });

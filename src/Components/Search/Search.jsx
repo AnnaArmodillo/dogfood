@@ -1,35 +1,39 @@
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
+import { useDebounce } from '../../hooks/useDebounce';
 import { changeSearchFilter } from '../../redux/slices/filterSlice';
 import searchStyle from './search.module.css';
 
 export function Search({ closeSearchHandler }) {
-  const [search, setSearch] = useState();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [search, setSearch] = useState(() => {
+    const searchValueFromQuery = searchParams.get('q');
+    return searchValueFromQuery ?? '';
+  });
   const dispatch = useDispatch();
+  const debouncedSearchValue = useDebounce(search, 1000);
   function changeSearchHandler(event) {
-    const newSearchValue = event.target.innerText;
-    console.log(newSearchValue);
+    const newSearchValue = event.target.value;
     setSearch(newSearchValue);
-    dispatch(changeSearchFilter(newSearchValue));
+    setSearchParams({
+      ...Object.fromEntries(searchParams.entries()),
+      q: newSearchValue,
+    });
   }
+  useEffect(() => {
+    dispatch(changeSearchFilter(debouncedSearchValue));
+  }, [dispatch, debouncedSearchValue]);
   return (
     <div className={searchStyle.searchWrapper}>
-      <div
-        contentEditable
-        suppressContentEditableWarning
-        className={searchStyle.search}
-        type="text"
-        onInput={changeSearchHandler}
-        value={search}
-      />
-      {/* <input
+      <input
         type="text"
         placeholder="Поиск..."
         value={search}
-        className={searchStyle.search}
+        className={searchStyle.inputSearch}
         onChange={changeSearchHandler}
-      /> */}
+      />
       <i
         onClick={closeSearchHandler}
         className={classNames(

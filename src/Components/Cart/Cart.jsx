@@ -26,27 +26,13 @@ export function Cart() {
   function buyHandler() {
     console.log('Заказ оформлен');
   }
-  if (!token) {
-    useEffect(() => {
+
+  useEffect(() => {
+    if (!token) {
       navigate('/signin');
-    });
-  }
-  // dogFoodApi.setToken(token);
-  if (!cart.length) {
-    return (
-      <div className={cartStyle.emptyCartBlock}>
-        <p>Корзина пуста</p>
-        <div className={cartStyle.linksWrapper}>
-          <NavLink to="/" className={cartStyle.link}>
-            На главную
-          </NavLink>
-          <NavLink to="/products" className={cartStyle.link}>
-            В каталог
-          </NavLink>
-        </div>
-      </div>
-    );
-  }
+    }
+  }, [token]);
+
   const {
     data: products,
     isLoading,
@@ -54,8 +40,11 @@ export function Cart() {
     error,
   } = useQuery({
     queryKey: ['cart'],
-    queryFn: () => dogFoodApi.getProductsByIDs(cart.map((product) => product.id)),
-    enabled: (!!cart && !!token),
+    queryFn: () => dogFoodApi.getProductsByIDs(
+      cart.map((product) => product.id),
+      token,
+    ),
+    enabled: !!cart.length && !!token,
   });
   if (isLoading) return <Loader />;
   if (isError) {
@@ -72,6 +61,27 @@ export function Cart() {
         * product.count;
     return totalCost;
   });
+  if (!cart.length) {
+    return (
+      <div className={cartStyle.emptyCartBlock}>
+        <p>Корзина пуста</p>
+        <div className={cartStyle.linksWrapper}>
+          <NavLink
+            to="/"
+            className={cartStyle.link}
+          >
+            На главную
+          </NavLink>
+          <NavLink
+            to="/products"
+            className={cartStyle.link}
+          >
+            В каталог
+          </NavLink>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className={cartStyle.cart}>
       <div className={cartStyle.productsWrapper}>
@@ -107,7 +117,7 @@ export function Cart() {
         <div className={cartStyle.totalPrice}>
           Общая сумма:
           {' '}
-          {totalCost}
+          {totalCost.toFixed(2)}
           {' '}
           ₽
         </div>

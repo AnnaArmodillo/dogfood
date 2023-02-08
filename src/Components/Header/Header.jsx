@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { getCartSelector } from '../../redux/slices/cartSlice';
+import { getSearchSelector } from '../../redux/slices/filterSlice';
 import { clearToken, getTokenSelector } from '../../redux/slices/tokenSlice';
 import { clearUserID } from '../../redux/slices/userIDSlice';
 import logo from '../logo.jpg';
@@ -15,8 +16,9 @@ export function Header() {
   const dispatch = useDispatch();
   const token = useSelector(getTokenSelector);
   const cart = useSelector(getCartSelector);
+  const search = useSelector(getSearchSelector);
   const { clearClient } = useQueryClient(QueryClientProvider);
-  const [isSearchActive, setIsSearchActive] = useState(false);
+  const [isSearchActive, setIsSearchActive] = useState(!!search);
   function clickSearchHandler() {
     setIsSearchActive(true);
   }

@@ -78,7 +78,7 @@ export function CartItem({
           </button>
         </div>
         <div className={cartItemStyle.price}>
-          {price}
+          {(price).toFixed(2)}
           {' '}
           ₽/шт.
         </div>
@@ -93,13 +93,13 @@ export function CartItem({
       </div>
       <div className={cartItemStyle.costWrapper}>
         <div className={cartItemStyle.totalCost}>
-          {price * count * (1 - discount / 100)}
+          {(price * count * (1 - discount / 100)).toFixed(2)}
           {' '}
           ₽
         </div>
         {discount ? (
           <div className={cartItemStyle.cost}>
-            {price * count}
+            {(price * count).toFixed(2)}
             {' '}
             ₽
           </div>

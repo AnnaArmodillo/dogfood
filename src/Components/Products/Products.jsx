@@ -9,34 +9,38 @@ import { Loader } from '../Loader/Loader';
 import { getTokenSelector } from '../../redux/slices/tokenSlice';
 import { getSearchSelector } from '../../redux/slices/filterSlice';
 import { getQueryKey } from './helper';
+// eslint-disable-next-line no-unused-vars
+import { Filters } from '../Filters/Filters';
 
 export function Products() {
   console.log('render products');
   const navigate = useNavigate();
   const token = useSelector(getTokenSelector);
   const search = useSelector(getSearchSelector);
-  if (token) {
-    dogFoodApi.setToken(token);
-    const {
-      data, isLoading, isError, error,
-    } = useQuery({
-      queryKey: getQueryKey(search),
-      queryFn: () => dogFoodApi.getAllProducts(search),
-    });
-    if (isLoading) return <Loader />;
-    if (isError) {
-      return (
-        <div className="errorMessage">
-          {error.message}
-        </div>
-      );
+  useEffect(() => {
+    if (!token) {
+      navigate('/signin');
     }
-    const { products } = data;
-    if (products && !products.length) {
-      return <p>Список пуст</p>;
-    }
-    return ({ products }
-      && (
+  }, [token]);
+  const {
+    data: products, isLoading, isError, error,
+  } = useQuery({
+    queryKey: getQueryKey(search),
+    queryFn: () => dogFoodApi.getAllProducts(search, token),
+    enabled: !!token,
+  });
+  if (isLoading) return <Loader />;
+  if (isError) {
+    return (
+      <div className={productsStyle.errorMessage}>
+        {error.message}
+      </div>
+    );
+  }
+  return (
+    <>
+      <Filters />
+      {products[0] && (
       <div className={productsStyle.products}>
         {products.map((product) => (
           <ProductItem
@@ -52,8 +56,10 @@ export function Products() {
           />
         ))}
       </div>
-      )
-    );
-  }
-  useEffect(() => { navigate('/signin'); });
+      )}
+      {!products[0] && products && (
+      <div className={productsStyle.emptyList}>По Вашему запросу ничего не найдено</div>
+      )}
+    </>
+  );
 }
