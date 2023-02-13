@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   checkProduct,
@@ -6,11 +7,13 @@ import {
   increaseProductCount,
   reduceProductCount,
 } from '../../redux/slices/cartSlice';
+import { Modal } from '../Modal/Modal';
 import cartItemStyle from './cartItem.module.css';
 
 export function CartItem({
   title, photo, price, wight, discount, id, stock,
 }) {
+  const [isModalActive, setIsModalActive] = useState(false);
   const cart = useSelector(getCartSelector);
   let count = 0;
   let isChecked = false;
@@ -20,6 +23,12 @@ export function CartItem({
     isChecked = currentProduct.isChecked;
   }
   const dispatch = useDispatch();
+  function closeModalHandler() {
+    setIsModalActive(false);
+  }
+  function openModalHandler() {
+    setIsModalActive(true);
+  }
   function deleteHandler() {
     dispatch(deleteProduct(id));
   }
@@ -36,7 +45,11 @@ export function CartItem({
   return (
     <div className={cartItemStyle.card}>
       <label className={cartItemStyle.check}>
-        <input type="checkbox" checked={isChecked} onChange={checkProductHandler} />
+        <input
+          type="checkbox"
+          checked={isChecked}
+          onChange={checkProductHandler}
+        />
       </label>
       <div className={cartItemStyle.photo}>
         <img
@@ -78,13 +91,13 @@ export function CartItem({
           </button>
         </div>
         <div className={cartItemStyle.price}>
-          {(price).toFixed(2)}
+          {price.toFixed(2)}
           {' '}
           ₽/шт.
         </div>
         <button
           type="button"
-          onClick={deleteHandler}
+          onClick={openModalHandler}
           title="Убрать из корзины"
           className={cartItemStyle.deleteButton}
         >
@@ -105,6 +118,29 @@ export function CartItem({
           </div>
         ) : null}
       </div>
+      <Modal isModalActive={isModalActive} closeModalHandler={closeModalHandler}>
+        <div className={cartItemStyle.question}>
+          Точно удалить товар &quot;
+          {title}
+          &quot;?
+        </div>
+        <div className={cartItemStyle.buttonsModalWrapper}>
+          <button
+            onClick={closeModalHandler}
+            className={cartItemStyle.buttonCancel}
+            type="button"
+          >
+            Отмена
+          </button>
+          <button
+            onClick={deleteHandler}
+            className={cartItemStyle.buttonClear}
+            type="button"
+          >
+            Удалить
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 }

@@ -1,98 +1,141 @@
 .card {
-    display: flex;
-    justify-content: left;
-    align-items: flex-start;
-    flex-direction: row;
-    gap: 8px;
+  display: flex;
+  justify-content: left;
+  align-items: flex-start;
+  flex-direction: row;
+  gap: 8px;
 }
 
 .title {
-    text-align: left;
-    font-size: 16px;
+  text-align: left;
+  font-size: 16px;
 }
 
 .photo img {
-    height: 100px;
-    max-width: 80%;
-    margin: auto;
+  height: 100px;
+  max-width: 80%;
+  margin: auto;
 }
 
 .photo {
-    text-align: center;
+  text-align: center;
+  width: 20%;
 }
 
 .totalCost {
-    font-size: 16px;
-    text-align: left;
+  font-size: 16px;
+  text-align: left;
 }
 
 .wight {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .discount {
-    background-color: rgba(255, 0, 0, 0.7);
-    border-radius: 12px;
-    padding: 4px;
-    line-height: 24px;
-    font-weight: 500;
-    width: fit-content;
+  background-color: rgba(255, 0, 0, 0.7);
+  border-radius: 12px;
+  padding: 4px;
+  line-height: 24px;
+  font-weight: 500;
+  width: fit-content;
 }
 
 .info {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    align-items: flex-start;
-    gap: 8px;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  align-items: flex-start;
+  gap: 8px;
 }
 
 .quantityWrapper {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    border: 2px solid rgb(250, 228, 105);
-    border-radius: 8px;
-    padding: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border: 2px solid rgb(250, 228, 105);
+  border-radius: 8px;
+  padding: 4px;
 }
 
 .quantityButton {
-    border: none;
-    background-color: white;
-    cursor: pointer;
+  border: none;
+  background-color: white;
+  cursor: pointer;
 }
 
 .deleteButton {
-    text-align: center;
-    background-color: white;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
+  text-align: center;
+  background-color: white;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
 }
 
 .buttonsWrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .price {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .quantityButton[disabled] {
-    cursor: auto;
+  cursor: auto;
 }
 
 .cost {
-    text-decoration: line-through;
-    font-size: 12px;
-    text-align: left;
+  text-decoration: line-through;
+  font-size: 12px;
+  text-align: left;
 }
 
 .costWrapper {
-display: flex;
-flex-direction: column;
-width: 10%;
+  display: flex;
+  flex-direction: column;
+  width: 10%;
+}
+
+.buttonCancel {
+  background-color: rgb(250, 228, 105);
+  font-size: 24px;
+  border-radius: 16px;
+  padding: 8px;
+  cursor: pointer;
+  margin-bottom: 16px;
+  text-align: center;
+  font-weight: 600;
+  border: none;
+  transition: all 0.5s ease;
+}
+
+.buttonClear {
+  background-color: rgb(250, 228, 105);
+  font-size: 24px;
+  border-radius: 16px;
+  padding: 8px;
+  cursor: pointer;
+  margin-bottom: 16px;
+  text-align: center;
+  font-weight: 600;
+  border: none;
+  transition: all 0.5s ease;
+}
+
+.buttonsModalWrapper {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 20px;
+}
+
+.buttonClear:hover,
+.buttonCancel:hover {
+  box-shadow: 4px 4px 2px rgb(189, 165, 33);
+}
+
+.question {
+  margin: 40px auto 20px;
+  text-align: center;
 }

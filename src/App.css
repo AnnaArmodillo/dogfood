@@ -15,3 +15,7 @@
   color: rgb(124, 20, 41);
   margin: 20px auto;
 }
+
+button:focus {
+  outline: none;
+}

@@ -1,0 +1,42 @@
+.modal {
+  z-index: 9999;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(26, 24, 24, 0.329);
+  backdrop-filter: blur(2px);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalInner {
+  max-width: 50%;
+  max-height: 50%;
+  background-color: white;
+  border-radius: 8px;
+  position: relative;
+  color: rgb(51, 22, 22);
+  font-size: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 8px;
+}
+
+.buttonClose {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(250, 228, 105);
+  border-radius: 4px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
