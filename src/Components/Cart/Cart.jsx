@@ -27,25 +27,24 @@ function CartInner() {
   function buyHandler() {
     console.log('Заказ оформлен');
   }
-
   useEffect(() => {
     if (!token) {
       navigate('/signin');
     }
   }, [token]);
-
   const {
     data: products,
     isLoading,
     isError,
     error,
+    isFetching,
   } = useQuery({
     queryKey: ['cart'],
     queryFn: () => dogFoodApi.getProductsByIDs(
       cart.map((product) => product.id),
       token,
     ),
-    enabled: !!cart.length && !!token,
+    enabled: !!token,
   });
   if (isLoading) return <Loader />;
   if (isError) {
@@ -108,6 +107,7 @@ function CartInner() {
             />
           ))}
         </div>
+        {isFetching && <Loader />}
       </div>
       <div className={cartStyle.order}>
         <div className={cartStyle.quantity}>
