@@ -12,7 +12,6 @@ import { Favourite } from './Components/Favourite/Favourite';
 import { Sales } from './Components/Sales/Sales';
 import { News } from './Components/News/News';
 import { Comments } from './Components/Comments/Comments';
-import { Orders } from './Components/Orders/Orders';
 import { FAQ } from './Components/FAQ/FAQ';
 import { Contacts } from './Components/Contacts/Contacts';
 import { Feedback } from './Components/Feedback/Feedback';
@@ -56,10 +55,6 @@ const router = createBrowserRouter([
       {
         path: 'comments',
         element: <Comments />,
-      },
-      {
-        path: 'orders',
-        element: <Orders />,
       },
       {
         path: 'faq',

@@ -9,10 +9,11 @@ import {
 } from '../../redux/slices/cartSlice';
 import { getTokenSelector } from '../../redux/slices/tokenSlice';
 import { CartItem } from '../CartItem/CartItem';
+import { scrollToTop } from '../HOCs/scrollToTop';
 import { Loader } from '../Loader/Loader';
 import cartStyle from './cart.module.css';
 
-export function Cart() {
+function CartInner() {
   const cart = useSelector(getCartSelector);
   const token = useSelector(getTokenSelector);
   const navigate = useNavigate();
@@ -130,5 +131,11 @@ export function Cart() {
         </button>
       </div>
     </div>
+  );
+}
+const CartScrollToTop = scrollToTop(CartInner);
+export function Cart() {
+  return (
+    <CartScrollToTop />
   );
 }

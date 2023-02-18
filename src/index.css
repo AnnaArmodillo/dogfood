@@ -8,7 +8,7 @@ body {
   display: flex;
   justify-content: center;
   width: 100vw;
-  height: fit-content;
+  height: 100vh;
   box-sizing: border-box;
   overflow-x: hidden;
   margin-right: calc(-1 * (100vw - 100%));

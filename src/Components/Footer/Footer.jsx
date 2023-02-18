@@ -53,7 +53,7 @@ export function Footer() {
       <div className={footerStyle.wrapper}>
         <NavLink
           className={footerStyle.link}
-          to="/orders"
+          to="/cart"
         >
           Оплата и доставка
         </NavLink>

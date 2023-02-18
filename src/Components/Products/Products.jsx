@@ -9,11 +9,11 @@ import { Loader } from '../Loader/Loader';
 import { getTokenSelector } from '../../redux/slices/tokenSlice';
 import { getSearchSelector } from '../../redux/slices/filterSlice';
 import { getQueryKey } from './helper';
-// eslint-disable-next-line no-unused-vars
 import { Filters } from '../Filters/Filters';
 import { Search } from '../Search/Search';
+import { scrollToTop } from '../HOCs/scrollToTop';
 
-export function Products() {
+function ProductsInner() {
   console.log('render products');
   const navigate = useNavigate();
   const token = useSelector(getTokenSelector);
@@ -63,5 +63,11 @@ export function Products() {
       <div className={productsStyle.emptyList}>По Вашему запросу ничего не найдено</div>
       )}
     </>
+  );
+}
+const ProductsScrollToTop = scrollToTop(ProductsInner);
+export function Products() {
+  return (
+    <ProductsScrollToTop />
   );
 }
