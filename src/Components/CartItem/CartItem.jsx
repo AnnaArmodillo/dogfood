@@ -1,19 +1,20 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  checkProduct,
-  deleteProduct,
-  getCartSelector,
-  increaseProductCount,
-  reduceProductCount,
-} from '../../redux/slices/cartSlice';
+import { useSelector } from 'react-redux';
+import { getCartSelector } from '../../redux/slices/cartSlice';
 import { Modal } from '../Modal/Modal';
+import { useActions } from './useActions';
 import cartItemStyle from './cartItem.module.css';
 
 export function CartItem({
   title, photo, price, wight, discount, id, stock,
 }) {
   const [isModalActive, setIsModalActive] = useState(false);
+  const {
+    checkProductHandler,
+    deleteHandler,
+    quantityIncreaseHandler,
+    quantityReduceHandler,
+  } = useActions();
   const cart = useSelector(getCartSelector);
   let count = 0;
   let isChecked = false;
@@ -22,25 +23,13 @@ export function CartItem({
     count = currentProduct.count;
     isChecked = currentProduct.isChecked;
   }
-  const dispatch = useDispatch();
   function closeModalHandler() {
     setIsModalActive(false);
   }
   function openModalHandler() {
     setIsModalActive(true);
   }
-  function deleteHandler() {
-    dispatch(deleteProduct(id));
-  }
-  function quantityIncreaseHandler() {
-    dispatch(increaseProductCount(id));
-  }
-  function quantityReduceHandler() {
-    dispatch(reduceProductCount(id));
-  }
-  function checkProductHandler() {
-    dispatch(checkProduct(id));
-  }
+
   if (count === 0) return null;
   return (
     <div className={cartItemStyle.card}>
@@ -48,7 +37,7 @@ export function CartItem({
         <input
           type="checkbox"
           checked={isChecked}
-          onChange={checkProductHandler}
+          onChange={() => checkProductHandler(id)}
         />
       </label>
       <div className={cartItemStyle.photo}>
@@ -75,7 +64,7 @@ export function CartItem({
           <button
             type="button"
             disabled={count < 2}
-            onClick={quantityReduceHandler}
+            onClick={() => quantityReduceHandler(id)}
             className={cartItemStyle.quantityButton}
           >
             <i className="fa-solid fa-minus" />
@@ -84,7 +73,7 @@ export function CartItem({
           <button
             type="button"
             disabled={count > stock - 1}
-            onClick={quantityIncreaseHandler}
+            onClick={() => quantityIncreaseHandler(id)}
             className={cartItemStyle.quantityButton}
           >
             <i className="fa-solid fa-plus" />
@@ -118,7 +107,10 @@ export function CartItem({
           </div>
         ) : null}
       </div>
-      <Modal isModalActive={isModalActive} closeModalHandler={closeModalHandler}>
+      <Modal
+        isModalActive={isModalActive}
+        closeModalHandler={closeModalHandler}
+      >
         <div className={cartItemStyle.question}>
           Точно удалить товар &quot;
           {title}
@@ -133,7 +125,7 @@ export function CartItem({
             Отмена
           </button>
           <button
-            onClick={deleteHandler}
+            onClick={() => deleteHandler(id)}
             className={cartItemStyle.buttonClear}
             type="button"
           >
