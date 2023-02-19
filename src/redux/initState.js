@@ -2,6 +2,7 @@ export const initState = {
   token: '',
   userID: '',
   cart: [],
+  favourite: [],
   filter: {
     search: '',
   },

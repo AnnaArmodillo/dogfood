@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { getInitState } from './initState';
 import { cartReducer } from './slices/cartSlice';
+import { favouriteReducer } from './slices/favouriteSlice';
 import { filterReducer } from './slices/filterSlice';
 import { tokenReducer } from './slices/tokenSlice';
 import { userIDReducer } from './slices/userIDSlice';
@@ -11,6 +12,7 @@ export const store = configureStore({
     userID: userIDReducer,
     cart: cartReducer,
     filter: filterReducer,
+    favourite: favouriteReducer,
   },
   preloadedState: getInitState(),
 });

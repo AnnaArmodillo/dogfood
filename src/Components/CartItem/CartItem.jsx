@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getCartSelector } from '../../redux/slices/cartSlice';
 import { Modal } from '../Modal/Modal';
 import { useActions } from './useActions';
@@ -47,7 +48,7 @@ export function CartItem({
         />
       </div>
       <div className={cartItemStyle.info}>
-        <div className={cartItemStyle.title}>{title}</div>
+        <Link to={`/products/${id}`} className={cartItemStyle.title}>{title}</Link>
         <div className={cartItemStyle.wight}>{wight}</div>
         {discount ? (
           <div className={cartItemStyle.discount}>

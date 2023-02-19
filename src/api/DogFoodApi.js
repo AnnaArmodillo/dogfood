@@ -75,8 +75,21 @@ class DogFoodApi {
     return res.json();
   }
 
-  async getProductByID(token) {
+  async getProductByID(id, token) {
     this.checkToken(token);
+    const res = await fetch(`${this.baseURL}/products/${id}`, {
+      headers: {
+        authorization: this.getAuthorizationToken(token),
+        'Content-Type': 'application/json',
+      },
+      groupId: this.group,
+    });
+    if (res.status >= 400) {
+      throw new Error(
+        `Ошибка, код ${res.status}`,
+      );
+    }
+    return res.json();
   }
 
   getProductsByIDs(ids, token) {

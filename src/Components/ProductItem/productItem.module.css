@@ -60,6 +60,7 @@ align-items: flex-start;
     color: red;
     position: absolute;
     right: 8px;
+    cursor: pointer;
 }
 
 .new {

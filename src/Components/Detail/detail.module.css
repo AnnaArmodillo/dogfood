@@ -1,0 +1,96 @@
+.errorMessage {
+  font-size: 32px;
+  font-weight: 500;
+  color: rgb(124, 20, 41);
+  margin: 100px auto;
+}
+
+.card {
+  margin: 100px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 80%;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.photo {
+  width: 300px;
+  height: auto;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+  width: 200px;
+  text-align: left;
+}
+
+.wight {
+  font-size: 12px;
+}
+
+.description {
+    font-size: 32px;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.reviews {
+    font-size: 12px;
+}
+
+.new {
+  background-color: rgba(75, 167, 238, 0.7);
+  border-radius: 12px;
+  padding: 4px;
+  line-height: 24px;
+  font-weight: 500;
+}
+
+.discount {
+  background-color: rgba(255, 0, 0, 0.7);
+  border-radius: 12px;
+  padding: 4px;
+  line-height: 24px;
+  font-weight: 500;
+}
+
+.price {
+  text-decoration: line-through;
+  font-size: 12px;
+}
+
+.totalPrice {
+  font-size: 24px;
+}
+
+.priceWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.like {
+  color: red;
+  font-size: 24px;
+  position: relative;
+  cursor: pointer;
+}
+
+.buttonBuy {
+  background-color: rgb(250, 228, 105);
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 600;
+  margin-top: 8px;
+  cursor: pointer;
+  font-size: 24px;
+  }

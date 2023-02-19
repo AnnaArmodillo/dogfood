@@ -17,6 +17,7 @@ import { Contacts } from './Components/Contacts/Contacts';
 import { Feedback } from './Components/Feedback/Feedback';
 import { store } from './redux/store';
 import { Cart } from './Components/Cart/Cart';
+import { Detail } from './Components/Detail/Detail';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: 'products',
         element: <Products />,
+      },
+      {
+        path: 'products/:id',
+        element: <Detail />,
       },
       {
         path: 'favourite',
