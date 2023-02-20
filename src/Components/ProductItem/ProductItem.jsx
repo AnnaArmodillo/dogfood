@@ -68,9 +68,9 @@ export function ProductItem({
         onClick={likeHandler}
       >
         {favourite.includes(id) ? (
-          <i className="fa-solid fa-heart" />
+          <i className="fa-solid fa-heart" title="Удалить из избранного" />
         ) : (
-          <i className="fa-regular fa-heart" />
+          <i className="fa-regular fa-heart" title="Добавить в избранное" />
         )}
       </div>
       <div className={productItemStyle.totalPrice}>

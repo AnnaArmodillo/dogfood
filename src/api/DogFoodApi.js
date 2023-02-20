@@ -92,7 +92,7 @@ class DogFoodApi {
     return res.json();
   }
 
-  getProductsByIDs(ids, token) {
+  async getProductsByIDs(ids, token) {
     this.checkToken(token);
     return Promise.all(
       ids.map((id) => fetch(`${this.baseURL}/products/${id}`, {
@@ -103,6 +103,22 @@ class DogFoodApi {
         groupId: this.group,
       }).then((res) => res.json())),
     );
+  }
+
+  async addReview(values, token, id) {
+    this.checkToken(token);
+    const res = await fetch(`${this.baseURL}/products/review/${id}`, {
+      method: 'PUT',
+      headers: {
+        authorization: this.getAuthorizationToken(token),
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(values),
+    });
+    if (res.status >= 300) {
+      throw new Error(`Ошибка, код ${res.status}`);
+    }
+    return res.json();
   }
 }
 

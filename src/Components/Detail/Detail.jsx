@@ -36,12 +36,13 @@ export function Detail() {
     isLoading,
     isError,
     error,
+    isFetching,
   } = useQuery({
     queryKey: ['productByID'],
     queryFn: () => dogFoodApi.getProductByID(id, token),
     enabled: !!token,
   });
-  if (isLoading) return <Loader />;
+  if (isLoading || isFetching) return <Loader />;
   if (isError) {
     return <div className={detailStyle.errorMessage}>{error.message}</div>;
   }
@@ -110,9 +111,9 @@ export function Detail() {
         </div>
         <div className={detailStyle.like} onClick={likeHandler}>
           {favourite.includes(id) ? (
-            <i className="fa-solid fa-heart" />
+            <i className="fa-solid fa-heart" title="Удалить из избранного" />
           ) : (
-            <i className="fa-regular fa-heart" />
+            <i className="fa-regular fa-heart" title="Добавить в избранное" />
           )}
         </div>
       </div>

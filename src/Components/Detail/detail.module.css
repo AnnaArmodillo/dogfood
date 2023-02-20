@@ -6,7 +6,7 @@
 }
 
 .card {
-  margin: 100px 40px;
+  margin: 100px auto;
   display: flex;
   flex-direction: column;
   justify-content: center;

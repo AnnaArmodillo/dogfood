@@ -78,6 +78,7 @@ function Signin() {
   } = useMutation({
     mutationFn: (values) => dogFoodApi.signin(values)
       .then((result) => {
+        console.log(result);
         dispatch((setToken(result.token)));
         dispatch((setUserID(result.data['_id'])));
         dogFoodApi.setUserID(result.data['_id']);
