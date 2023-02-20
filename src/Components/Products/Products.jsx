@@ -6,7 +6,7 @@ import { dogFoodApi } from '../../api/DogFoodApi';
 import { ProductItem } from '../ProductItem/ProductItem';
 import productsStyle from './products.module.css';
 import { Loader } from '../Loader/Loader';
-import { getTokenSelector } from '../../redux/slices/tokenSlice';
+import { getTokenSelector } from '../../redux/slices/userSlice/tokenSlice';
 import { getSearchSelector } from '../../redux/slices/filterSlice';
 import { getQueryKey } from './helper';
 import { Filters } from '../Filters/Filters';

@@ -10,8 +10,9 @@ import { signinValidationScheme } from './signinValidator';
 import signinStyle from './signin.module.css';
 import { withQuery } from '../HOCs/withQuery';
 import { dogFoodApi } from '../../api/DogFoodApi';
-import { setUserID } from '../../redux/slices/userIDSlice';
-import { setToken } from '../../redux/slices/tokenSlice';
+import { setUserID } from '../../redux/slices/userSlice/userIDSlice';
+import { setToken } from '../../redux/slices/userSlice/tokenSlice';
+import { setEmail } from '../../redux/slices/userSlice/emailSlice';
 
 function SigninInner({ mutateAsync }) {
   const navigate = useNavigate();
@@ -78,9 +79,9 @@ function Signin() {
   } = useMutation({
     mutationFn: (values) => dogFoodApi.signin(values)
       .then((result) => {
-        console.log(result);
         dispatch((setToken(result.token)));
         dispatch((setUserID(result.data['_id'])));
+        dispatch((setEmail(result.data.email)));
         dogFoodApi.setUserID(result.data['_id']);
       }),
   });

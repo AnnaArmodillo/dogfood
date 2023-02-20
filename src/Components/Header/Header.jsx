@@ -3,8 +3,8 @@ import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { getCartSelector } from '../../redux/slices/cartSlice';
-import { clearToken, getTokenSelector } from '../../redux/slices/tokenSlice';
-import { clearUserID } from '../../redux/slices/userIDSlice';
+import { clearToken, getTokenSelector } from '../../redux/slices/userSlice/tokenSlice';
+import { clearUserID } from '../../redux/slices/userSlice/userIDSlice';
 import logo from '../logo.jpg';
 import headerStyle from './header.module.css';
 

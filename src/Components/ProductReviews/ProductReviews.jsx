@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { dogFoodApi } from '../../api/DogFoodApi';
-import { getTokenSelector } from '../../redux/slices/tokenSlice';
+import { getTokenSelector } from '../../redux/slices/userSlice/tokenSlice';
 import { ProductReview } from '../ProductReview/ProductReview';
 import productReviewsStyle from './productReviews.module.css';
 import { productReviewsValidationScheme } from './productReviewsValidator';

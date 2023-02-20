@@ -1,6 +1,10 @@
 export const initState = {
-  token: '',
-  userID: '',
+  user: {
+    token: '',
+    userID: '',
+    group: 'sm9',
+    email: '',
+  },
   cart: [],
   favourite: [],
   filter: {
