@@ -1,3 +1,17 @@
-.div {
+.favourite {
   margin: 100px auto;
+  width: 100%;
+}
+
+.errorMessage {
+  font-size: 32px;
+  font-weight: 500;
+  color: rgb(124, 20, 41);
+  margin: 100px auto;
+}
+
+.emptyList {
+  margin: 150px auto;
+  font-weight: 600;
+  font-size: 40px;
 }

@@ -30,7 +30,6 @@ export function CartItem({
   function openModalHandler() {
     setIsModalActive(true);
   }
-
   if (count === 0) return null;
   return (
     <div className={cartItemStyle.card}>
