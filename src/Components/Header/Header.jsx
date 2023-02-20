@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { getCartSelector } from '../../redux/slices/cartSlice';
+import { getFavouriteSelector } from '../../redux/slices/favouriteSlice';
 import { clearToken, getTokenSelector } from '../../redux/slices/tokenSlice';
 import { clearUserID } from '../../redux/slices/userIDSlice';
 import logo from '../logo.jpg';
@@ -13,10 +14,11 @@ export function Header() {
   const dispatch = useDispatch();
   const token = useSelector(getTokenSelector);
   const cart = useSelector(getCartSelector);
+  const favourite = useSelector(getFavouriteSelector);
   const { clearClient } = useQueryClient(QueryClientProvider);
   function logoutHandler() {
-    dispatch((clearToken()));
-    dispatch((clearUserID()));
+    dispatch(clearToken());
+    dispatch(clearUserID());
     setTimeout(clearClient);
   }
   return (
@@ -38,22 +40,28 @@ export function Header() {
       <li>
         <NavLink
           className={({ isActive }) => classNames({ [headerStyle.activeLink]: isActive }, [
-            headerStyle.link,
+            headerStyle.link, headerStyle.favouriteWrapper,
           ])}
           to="/favourite"
         >
           <i className="fa-regular fa-heart" />
+          <div className={headerStyle.productsQuantity}>
+            {token ? favourite.length || '' : ''}
+          </div>
         </NavLink>
       </li>
       <li>
         <NavLink
           className={({ isActive }) => classNames({ [headerStyle.activeLink]: isActive }, [
-            headerStyle.link, headerStyle.cartWrapper,
+            headerStyle.link,
+            headerStyle.cartWrapper,
           ])}
           to="/cart"
         >
           <i className="fa-solid fa-cart-shopping" />
-          <div className={headerStyle.productsQuantity}>{token ? (cart.length || '') : '' }</div>
+          <div className={headerStyle.productsQuantity}>
+            {token ? cart.length || '' : ''}
+          </div>
         </NavLink>
       </li>
       <li>
