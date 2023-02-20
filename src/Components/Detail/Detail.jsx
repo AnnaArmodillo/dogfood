@@ -57,13 +57,13 @@ export function Detail() {
         <div className={detailStyle.info}>
           <div className={detailStyle.priceWrapper}>
             <div className={detailStyle.totalPrice}>
-              {product.price * (1 - product.discount / 100)}
+              {(product.price * (1 - product.discount / 100)).toFixed(2)}
               {' '}
               ₽
             </div>
             {product.discount ? (
               <div className={detailStyle.price}>
-                {product.price}
+                {product.price.toFixed(2)}
                 {' '}
                 ₽
               </div>
