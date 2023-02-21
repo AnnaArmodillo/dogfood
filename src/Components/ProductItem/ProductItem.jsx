@@ -74,13 +74,13 @@ export function ProductItem({
         )}
       </div>
       <div className={productItemStyle.totalPrice}>
-        {price * (1 - discount / 100)}
+        {(price * (1 - discount / 100)).toFixed(2)}
         {' '}
         ₽
       </div>
       {discount ? (
         <div className={productItemStyle.price}>
-          {price}
+          {price.toFixed(2)}
           {' '}
           ₽
         </div>

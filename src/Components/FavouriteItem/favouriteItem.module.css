@@ -83,3 +83,14 @@
   position: relative;
   cursor: pointer;
 }
+
+.button {
+  background-color: rgb(250, 228, 105);
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 600;
+  margin-top: 8px;
+  cursor: pointer;
+  font-size: 24px;
+  }

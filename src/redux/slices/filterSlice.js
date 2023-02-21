@@ -5,14 +5,18 @@ const filterSlice = createSlice({
   name: 'filter',
   initialState: initState.filter,
   reducers: {
-    changeSearchFilter(state, action) {
+    changeSearchValue(state, action) {
       state.search = action.payload;
+    },
+    changeSearchFilterName(state, action) {
+      state.filterName = action.payload;
     },
   },
 });
 
 export const {
-  changeSearchFilter,
+  changeSearchValue, changeSearchFilterName,
 } = filterSlice.actions;
 export const filterReducer = filterSlice.reducer;
 export const getSearchSelector = (state) => state.filter.search;
+export const getSearchFilterSelector = (state) => state.filter.filterName;

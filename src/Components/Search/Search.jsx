@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import { useDebounce } from '../../hooks/useDebounce';
-import { changeSearchFilter } from '../../redux/slices/filterSlice';
+import { changeSearchValue } from '../../redux/slices/filterSlice';
 import searchStyle from './search.module.css';
 
 export function Search() {
@@ -30,7 +30,7 @@ export function Search() {
     });
   }
   useEffect(() => {
-    dispatch(changeSearchFilter(debouncedSearchValue));
+    dispatch(changeSearchValue(debouncedSearchValue));
   }, [dispatch, debouncedSearchValue]);
   return (
     <div className={searchStyle.searchWrapper}>
