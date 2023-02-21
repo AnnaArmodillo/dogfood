@@ -78,6 +78,12 @@ function CartInner() {
           >
             В каталог
           </NavLink>
+          <NavLink
+            to="/profile"
+            className={cartStyle.link}
+          >
+            В профиль
+          </NavLink>
         </div>
       </div>
     );

@@ -1,0 +1,35 @@
+.errorMessage {
+    font-size: 32px;
+    font-weight: 500;
+    color: rgb(124, 20, 41);
+    margin: 100px auto;
+  }
+
+.card {
+    margin: 150px 40px;
+    display: flex;
+    justify-content: left;
+    width: 100%;
+    gap: 40px;
+}
+
+.photo {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    vertical-align:middle;
+}
+
+.infoWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.info {
+    font-weight: 500;
+    text-align: left;
+    margin-bottom: 12px;
+}

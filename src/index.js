@@ -9,7 +9,6 @@ import { SigninMemo as Signin } from './Components/Signin/Signin';
 import { Main } from './Components/Main/Main';
 import { Products } from './Components/Products/Products';
 import { Favourite } from './Components/Favourite/Favourite';
-import { Sales } from './Components/Sales/Sales';
 import { News } from './Components/News/News';
 import { Comments } from './Components/Comments/Comments';
 import { FAQ } from './Components/FAQ/FAQ';
@@ -18,6 +17,7 @@ import { Feedback } from './Components/Feedback/Feedback';
 import { store } from './redux/store';
 import { Cart } from './Components/Cart/Cart';
 import { Detail } from './Components/Detail/Detail';
+import { Profile } from './Components/Profile/Profile';
 
 const router = createBrowserRouter([
   {
@@ -50,8 +50,8 @@ const router = createBrowserRouter([
         element: <Cart />,
       },
       {
-        path: 'sales',
-        element: <Sales />,
+        path: 'products?filterName=Скидки',
+        element: <Products />,
       },
       {
         path: 'news',
@@ -72,6 +72,10 @@ const router = createBrowserRouter([
       {
         path: 'contacts',
         element: <Contacts />,
+      },
+      {
+        path: 'profile',
+        element: <Profile />,
       },
     ],
   },

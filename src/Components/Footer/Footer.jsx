@@ -33,7 +33,7 @@ export function Footer() {
         </NavLink>
         <NavLink
           className={footerStyle.link}
-          to="/sales"
+          to="/products?filterName=Скидки"
         >
           Акции
         </NavLink>

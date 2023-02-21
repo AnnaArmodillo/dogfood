@@ -98,6 +98,16 @@ export function Header() {
           </NavLink>
         </li>
       )}
+      <li>
+        <NavLink
+          className={({ isActive }) => classNames({ [headerStyle.activeLink]: isActive }, [
+            headerStyle.link, headerStyle.favouriteWrapper,
+          ])}
+          to="/profile"
+        >
+          <i className="fa-solid fa-user" />
+        </NavLink>
+      </li>
     </ul>
   );
 }

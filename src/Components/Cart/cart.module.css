@@ -38,6 +38,7 @@
   margin: 150px auto;
   font-weight: 600;
   font-size: 40px;
+  width: 80%;
 }
 
 .errorMessage {
@@ -67,6 +68,7 @@
 .linksWrapper {
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 
 .link {
