@@ -69,3 +69,10 @@ input + label > i:hover {
     display: flex;
     justify-content: space-between;
 }
+
+.errorMessage {
+  font-size: 32px;
+  font-weight: 500;
+  color: rgb(124, 20, 41);
+  margin: 20px auto;
+}

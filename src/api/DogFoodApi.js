@@ -108,7 +108,7 @@ class DogFoodApi {
   async addReview(values, token, id) {
     this.checkToken(token);
     const res = await fetch(`${this.baseURL}/products/review/${id}`, {
-      method: 'PUT',
+      method: 'POST',
       headers: {
         authorization: this.getAuthorizationToken(token),
         'Content-Type': 'application/json',

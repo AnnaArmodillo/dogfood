@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { dogFoodApi } from '../../api/DogFoodApi';
 import { getTokenSelector } from '../../redux/slices/userSlice/tokenSlice';
+import { Loader } from '../Loader/Loader';
 import { ProductReview } from '../ProductReview/ProductReview';
 import productReviewsStyle from './productReviews.module.css';
 import { productReviewsValidationScheme } from './productReviewsValidator';
@@ -30,6 +31,7 @@ export function ProductReviews({ reviews }) {
   });
   const submitHandler = async (values) => {
     await mutateAsync(values);
+    setIsReviewFormOpen(false);
   };
   console.log(isLoading, isError, error);
   return (
@@ -123,6 +125,13 @@ export function ProductReviews({ reviews }) {
                 />
                 <div className={productReviewsStyle.buttonsWrapper}>
                   <button
+                    type="button"
+                    className={productReviewsStyle.button}
+                    onClick={closeReviewFormHandler}
+                  >
+                    Отмена
+                  </button>
+                  <button
                     className={classNames(productReviewsStyle.button, {
                       [productReviewsStyle.disabled]: !isValid,
                     })}
@@ -131,19 +140,14 @@ export function ProductReviews({ reviews }) {
                   >
                     Опубликовать отзыв
                   </button>
-                  <button
-                    type="button"
-                    className={productReviewsStyle.button}
-                    onClick={closeReviewFormHandler}
-                  >
-                    Отмена
-                  </button>
                 </div>
               </Form>
             );
           }}
         </Formik>
       )}
+      {isLoading && <Loader />}
+      {isError && (<div className={productReviewsStyle.errorMessage}>{error.message}</div>)}
       <ul className={productReviewsStyle.reviews}>
         {reviews.map((review) => (
           <ProductReview
