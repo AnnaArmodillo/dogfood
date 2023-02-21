@@ -10,7 +10,8 @@ export function ProductReview({ review }) {
     <li className={productReviewStyle.review}>
       <div className={productReviewStyle.top}>
         <div className={productReviewStyle.date}>
-          User
+          Пользователь
+          {' '}
           {review.author}
           ,
           {' '}

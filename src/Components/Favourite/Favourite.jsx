@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { dogFoodApi } from '../../api/DogFoodApi';
 import { getFavouriteSelector } from '../../redux/slices/favouriteSlice';
-import { getTokenSelector } from '../../redux/slices/tokenSlice';
+import { getTokenSelector } from '../../redux/slices/userSlice/tokenSlice';
 import { FavouriteItem } from '../FavouriteItem/FavouriteItem';
 import { scrollToTop } from '../HOCs/scrollToTop';
 import { Loader } from '../Loader/Loader';

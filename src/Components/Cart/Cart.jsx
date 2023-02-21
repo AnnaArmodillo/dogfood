@@ -7,7 +7,7 @@ import {
   checkAllProducts,
   getCartSelector,
 } from '../../redux/slices/cartSlice';
-import { getTokenSelector } from '../../redux/slices/tokenSlice';
+import { getTokenSelector } from '../../redux/slices/userSlice/tokenSlice';
 import { CartItem } from '../CartItem/CartItem';
 import { scrollToTop } from '../HOCs/scrollToTop';
 import { Loader } from '../Loader/Loader';

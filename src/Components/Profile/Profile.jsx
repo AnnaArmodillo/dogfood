@@ -1,14 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { dogFoodApi } from '../../api/DogFoodApi';
-import { getTokenSelector } from '../../redux/slices/tokenSlice';
-import { getUserIDSelector } from '../../redux/slices/userIDSlice';
+import { getTokenSelector } from '../../redux/slices/userSlice/tokenSlice';
+import { getUserIDSelector } from '../../redux/slices/userSlice/userIDSlice';
 import { Loader } from '../Loader/Loader';
 import profileStyle from './profile.module.css';
 
 export function Profile() {
   const token = useSelector(getTokenSelector);
   const userID = useSelector(getUserIDSelector);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!token) {
+      navigate('/signin');
+    }
+  }, [token]);
   const {
     data: userData,
     isLoading,
