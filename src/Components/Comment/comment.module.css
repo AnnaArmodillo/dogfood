@@ -1,0 +1,39 @@
+.review {
+  list-style: none;
+  text-align: left;
+  border: 2px solid rgb(189, 165, 33);
+  border-radius: 8px;
+  padding: 8px 8px 16px;
+  margin: 16px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.date {
+  font-size: 12px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.star {
+  color: rgb(250, 228, 105);
+}
+
+.product {
+  text-align: left;
+  font-size: 16px;
+  text-decoration: none;
+  color: black;
+  transition: all 0.5s ease;
+  font-weight: 500;
+  margin-top: 12px;
+}
+
+.product:hover {
+  color: rgb(14, 14, 160);
+}

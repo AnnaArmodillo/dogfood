@@ -151,7 +151,7 @@ export function ProductReviews({ reviews }) {
         {reviews.map((review) => (
           <ProductReview
             review={review}
-            key={review.created_at}
+            key={review['_id']}
           />
         ))}
       </ul>

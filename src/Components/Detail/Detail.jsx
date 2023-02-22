@@ -20,7 +20,6 @@ export function Detail() {
   const navigate = useNavigate();
   const token = useSelector(getTokenSelector);
   const cart = useSelector(getCartSelector);
-  // eslint-disable-next-line no-unused-vars
   const userID = useSelector(getUserIDSelector);
   const favourite = useSelector(getFavouriteSelector);
   const dispatch = useDispatch();

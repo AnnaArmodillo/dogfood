@@ -137,6 +137,23 @@ class DogFoodApi {
     }
     return res.json();
   }
+
+  async getAllReviews(token) {
+    this.checkToken(token);
+    const res = await fetch(`${this.baseURL}/products/review/`, {
+      headers: {
+        authorization: this.getAuthorizationToken(token),
+        'Content-Type': 'application/json',
+      },
+      groupId: this.group,
+    });
+    if (res.status >= 400) {
+      throw new Error(
+        `Ошибка, код ${res.status}`,
+      );
+    }
+    return res.json();
+  }
 }
 
 export const dogFoodApi = new DogFoodApi({
