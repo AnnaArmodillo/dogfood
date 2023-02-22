@@ -12,7 +12,7 @@ export function ProductReview({ review }) {
         <div className={productReviewStyle.date}>
           Пользователь
           {' '}
-          {review.author['_id']}
+          {review.author}
           ,
           {' '}
           {formattedCreatedAt}

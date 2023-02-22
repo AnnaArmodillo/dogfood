@@ -87,16 +87,10 @@ const queryClient = new QueryClient({
     },
   },
 });
-function clearClient() {
-  queryClient.invalidateQueries({
-    queryKey: ['allProducts'],
-  });
-}
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <QueryClientProvider
     client={queryClient}
-    clearClient={clearClient}
   >
     <Provider store={store}>
       <RouterProvider router={router} />

@@ -1,4 +1,3 @@
-import { QueryClientProvider, useQueryClient } from '@tanstack/react-query';
 import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -15,11 +14,9 @@ export function Header() {
   const token = useSelector(getTokenSelector);
   const cart = useSelector(getCartSelector);
   const favourite = useSelector(getFavouriteSelector);
-  const { clearClient } = useQueryClient(QueryClientProvider);
   function logoutHandler() {
     dispatch(clearToken());
     dispatch(clearUserID());
-    setTimeout(clearClient);
   }
   return (
     <ul className={headerStyle.header}>

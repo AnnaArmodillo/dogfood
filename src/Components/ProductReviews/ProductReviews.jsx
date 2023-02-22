@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import classNames from 'classnames';
 import {
   ErrorMessage, Field, Form, Formik,
@@ -17,6 +17,7 @@ export function ProductReviews({ reviews }) {
   const [isReviewFormOpen, setIsReviewFormOpen] = useState(false);
   const token = useSelector(getTokenSelector);
   const { id } = useParams();
+  const queryClient = useQueryClient();
   reviews.sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at));
   function openReviewFormHandler() {
     setIsReviewFormOpen(true);
@@ -32,6 +33,9 @@ export function ProductReviews({ reviews }) {
   const submitHandler = async (values) => {
     await mutateAsync(values);
     setIsReviewFormOpen(false);
+    queryClient.invalidateQueries({
+      queryKey: ['productByID'],
+    });
   };
   return (
     <>

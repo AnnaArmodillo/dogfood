@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { dogFoodApi } from '../../api/DogFoodApi';
 import { getTokenSelector } from '../../redux/slices/userSlice/tokenSlice';
 import { Loader } from '../Loader/Loader';
@@ -8,6 +10,12 @@ import commentsStyle from './comments.module.css';
 
 export function Comments() {
   const token = useSelector(getTokenSelector);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!token) {
+      navigate('/signin');
+    }
+  }, [token]);
   const {
     data: reviews,
     isLoading,
