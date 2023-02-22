@@ -5,6 +5,7 @@ import filterItemStyle from './filterItem.module.css';
 export function FilterItem({ filterName, clickFilterHandler }) {
   const [searchParams] = useSearchParams();
   const currentFilterName = searchParams.get('filterName');
+  console.log(currentFilterName);
   return (
     <button
       onClick={() => clickFilterHandler(filterName)}
@@ -13,7 +14,6 @@ export function FilterItem({ filterName, clickFilterHandler }) {
           ? filterItemStyle.filterButtonActive
           : '',
         filterItemStyle.filterButton,
-
       )}
       type="button"
     >

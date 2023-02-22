@@ -4,7 +4,7 @@ import {
   deleteProduct,
   increaseProductCount,
   reduceProductCount,
-} from '../../redux/slices/cartSlice';
+} from '../redux/slices/cartSlice';
 
 export function useActions() {
   const dispatch = useDispatch();

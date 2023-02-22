@@ -137,7 +137,7 @@ export function Detail() {
               <i className="fa-solid fa-cart-shopping" />
             </button>
           ) : (
-            <div>Товар уже есть в Вашей корзине</div>
+            <div>Этот товар уже есть в Вашей корзине</div>
           )}
         </div>
         <button

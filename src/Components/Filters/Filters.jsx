@@ -3,12 +3,12 @@ import { useSearchParams } from 'react-router-dom';
 import { changeSearchFilterName } from '../../redux/slices/filterSlice';
 import { FilterItem } from '../FilterItem/FilterItem';
 import {
-  CHEAP, EXPENSIVE, NEW, SALES,
+  CHEAP, EXPENSIVE, NEW, OLD, SALES,
 } from './constants';
 import FiltersStyle from './filters.module.css';
 
 export function Filters() {
-  const FILTERS = [NEW, SALES, CHEAP, EXPENSIVE];
+  const FILTERS = [NEW, OLD, SALES, CHEAP, EXPENSIVE];
   const [searchParams, setSearchParams] = useSearchParams();
   const currentFilterName = searchParams.get('filterName');
   const dispatch = useDispatch();
@@ -18,13 +18,11 @@ export function Filters() {
         ...Object.fromEntries(searchParams.entries()),
         filterName,
       });
-      dispatch((changeSearchFilterName(filterName)));
+      dispatch(changeSearchFilterName(filterName));
     } else {
-      setSearchParams({
-        ...Object.fromEntries(searchParams.entries()),
-        filterName: '',
-      });
-      dispatch((changeSearchFilterName('')));
+      searchParams.delete('filterName');
+      setSearchParams(searchParams);
+      dispatch(changeSearchFilterName(''));
     }
   }
   return (

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getCartSelector } from '../../redux/slices/cartSlice';
 import { Modal } from '../Modal/Modal';
-import { useActions } from './useActions';
+import { useActions } from '../../hooks/useActions';
 import cartItemStyle from './cartItem.module.css';
 
 export function CartItem({

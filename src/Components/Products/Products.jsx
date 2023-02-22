@@ -16,7 +16,7 @@ import { Filters } from '../Filters/Filters';
 import { Search } from '../Search/Search';
 import { scrollToTop } from '../HOCs/scrollToTop';
 import {
-  CHEAP, EXPENSIVE, NEW, SALES,
+  CHEAP, EXPENSIVE, NEW, OLD, SALES,
 } from '../Filters/constants';
 
 function ProductsInner() {
@@ -26,19 +26,26 @@ function ProductsInner() {
   const search = useSelector(getSearchSelector);
   const filterName = useSelector(getSearchFilterSelector);
   let sortedProducts = [];
-  function sortProducts([...products]) {
+  function sortProducts(products) {
     switch (filterName) {
       case NEW:
-        sortedProducts = products.filter((product) => product.tags.includes('new'));
+        sortedProducts = products.sort(
+          (a, b) => Date.parse(b.created_at) - Date.parse(a.created_at),
+        );
+        break;
+      case OLD:
+        sortedProducts = products.sort(
+          (a, b) => Date.parse(a.created_at) - Date.parse(b.created_at),
+        );
         break;
       case SALES:
         sortedProducts = products.filter((product) => product.discount);
         break;
       case CHEAP:
-        sortedProducts = products.sort((a, b) => (a.price - b.price));
+        sortedProducts = products.sort((a, b) => a.price - b.price);
         break;
       case EXPENSIVE:
-        sortedProducts = products.sort((a, b) => (b.price - a.price));
+        sortedProducts = products.sort((a, b) => b.price - a.price);
         break;
       default:
         sortedProducts = products;
@@ -64,7 +71,7 @@ function ProductsInner() {
   if (isError) {
     return <div className={productsStyle.errorMessage}>{error.message}</div>;
   }
-  sortProducts(products);
+  sortProducts([...products]);
   return (
     <>
       <Search />
@@ -86,7 +93,7 @@ function ProductsInner() {
           ))}
         </div>
       )}
-      {!products[0] && products && (
+      {!sortedProducts[0] && products && (
         <div className={productsStyle.emptyList}>
           По Вашему запросу ничего не найдено
         </div>

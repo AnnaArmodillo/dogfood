@@ -41,13 +41,10 @@ const cartSlice = createSlice({
       currentProduct.isChecked = !currentProduct.isChecked;
     },
     checkAllProducts(state) {
-      if (state.every((product) => product.isChecked)) {
-        return state.forEach((product) => { product.isChecked = !product.isChecked; });
-      }
-      if (state.some((product) => product.isChecked)) {
-        return state.forEach((product) => { product.isChecked = true; });
-      }
       return state.forEach((product) => { product.isChecked = true; });
+    },
+    uncheckAllProducts(state) {
+      return state.forEach((product) => { product.isChecked = false; });
     },
   },
 });
@@ -59,6 +56,7 @@ export const {
   reduceProductCount,
   checkProduct,
   checkAllProducts,
+  uncheckAllProducts,
 } = cartSlice.actions;
 export const cartReducer = cartSlice.reducer;
 export const getCartSelector = (state) => state.cart;

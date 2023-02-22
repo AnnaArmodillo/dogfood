@@ -6,6 +6,7 @@ import { dogFoodApi } from '../../api/DogFoodApi';
 import {
   checkAllProducts,
   getCartSelector,
+  uncheckAllProducts,
 } from '../../redux/slices/cartSlice';
 import { getTokenSelector } from '../../redux/slices/userSlice/tokenSlice';
 import { CartItem } from '../CartItem/CartItem';
@@ -22,7 +23,13 @@ function CartInner() {
     return cart.every((product) => product.isChecked);
   }
   function checkAllProductsHandler() {
-    dispatch(checkAllProducts());
+    if (cart.every((product) => product.isChecked)) {
+      dispatch(uncheckAllProducts());
+    } else if (cart.some((product) => product.isChecked)) {
+      dispatch(checkAllProducts());
+    } else {
+      dispatch(checkAllProducts());
+    }
   }
   function buyHandler() {
     console.log('Заказ оформлен');
