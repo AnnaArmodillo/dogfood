@@ -106,20 +106,7 @@
   width: 10%;
 }
 
-.buttonCancel {
-  background-color: rgb(250, 228, 105);
-  font-size: 24px;
-  border-radius: 16px;
-  padding: 8px;
-  cursor: pointer;
-  margin-bottom: 16px;
-  text-align: center;
-  font-weight: 600;
-  border: none;
-  transition: all 0.5s ease;
-}
-
-.buttonClear {
+.buttonCancel, .buttonClear {
   background-color: rgb(250, 228, 105);
   font-size: 24px;
   border-radius: 16px;
