@@ -1,162 +1,175 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import classNames from 'classnames';
 import {
   ErrorMessage, Field, Form, Formik,
 } from 'formik';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { dogFoodApi } from '../../api/DogFoodApi';
 import { getTokenSelector } from '../../redux/slices/userSlice/tokenSlice';
 import { Loader } from '../Loader/Loader';
-import newProductFormStyle from './newProductForm.module.css';
-import { newProductFormValidationScheme } from './newProductFormValidator';
+import editProductFormStyle from './editProductForm.module.css';
+import { editProductFormValidationScheme } from './editProductFormValidator';
 
-export function NewProductForm({ setIsAddNewProductModalActive }) {
+export function EditProductForm({ setIsModalEditProductActive, product }) {
   const token = useSelector(getTokenSelector);
+  const { id } = useParams();
+  const queryClient = useQueryClient();
   const {
     mutateAsync, isError, error, isLoading,
   } = useMutation({
-    mutationFn: (values) => dogFoodApi.addNewProduct(values, token),
+    mutationFn: (values) => dogFoodApi.editProductByID(values, id, token),
   });
   const submitHandler = async (values) => {
     await mutateAsync(values);
-    setIsAddNewProductModalActive(false);
+    setIsModalEditProductActive(false);
+    queryClient.invalidateQueries({
+      queryKey: ['productByID'],
+    });
   };
   return (
     <Formik
       initialValues={{
-        available: true,
-        pictures: '',
-        name: '',
-        price: '',
-        discount: '',
-        stock: '',
-        wight: '',
-        description: '',
+        available: product.available,
+        pictures: product.pictures,
+        name: product.name,
+        price: product.price,
+        discount: product.discount,
+        stock: product.stock,
+        wight: product.wight,
+        description: product.description,
       }}
-      validationSchema={newProductFormValidationScheme}
+      validationSchema={editProductFormValidationScheme}
       onSubmit={submitHandler}
     >
       {(formik) => {
         const { isValid } = formik;
         return (
-          <Form className={newProductFormStyle.form}>
+          <Form className={editProductFormStyle.form}>
             {!isLoading && (
             <>
-              <div className={[newProductFormStyle.fieldWrapper]}>
+              <div className={[editProductFormStyle.fieldWrapper]}>
                 <Field
-                  className={newProductFormStyle.field}
+                  className={editProductFormStyle.field}
                   type="text"
                   name="name"
                   placeholder="наименование"
+                  title="Наименование"
                 />
                 <ErrorMessage
-                  className={newProductFormStyle.error}
+                  className={editProductFormStyle.error}
                   name="name"
                   component="div"
                 />
               </div>
-              <div className={[newProductFormStyle.fieldWrapper]}>
+              <div className={[editProductFormStyle.fieldWrapper]}>
                 <Field
-                  className={newProductFormStyle.field}
+                  className={editProductFormStyle.field}
                   type="text"
                   name="price"
                   placeholder="цена"
+                  title="Цена"
                 />
                 <ErrorMessage
-                  className={newProductFormStyle.error}
+                  className={editProductFormStyle.error}
                   name="price"
                   component="div"
                 />
               </div>
-              <div className={[newProductFormStyle.fieldWrapper]}>
+              <div className={[editProductFormStyle.fieldWrapper]}>
                 <Field
-                  className={newProductFormStyle.field}
+                  className={editProductFormStyle.field}
                   type="text"
                   name="wight"
                   placeholder="количество"
+                  title="Количество"
                 />
                 <ErrorMessage
-                  className={newProductFormStyle.error}
+                  className={editProductFormStyle.error}
                   name="wight"
                   component="div"
                 />
               </div>
-              <div className={[newProductFormStyle.fieldWrapper]}>
+              <div className={[editProductFormStyle.fieldWrapper]}>
                 <Field
-                  className={newProductFormStyle.field}
+                  className={editProductFormStyle.field}
                   type="text"
                   name="description"
                   placeholder="описание"
+                  title="Описание"
                 />
                 <ErrorMessage
-                  className={newProductFormStyle.error}
+                  className={editProductFormStyle.error}
                   name="description"
                   component="div"
                 />
               </div>
-              <div className={[newProductFormStyle.fieldWrapper]}>
+              <div className={[editProductFormStyle.fieldWrapper]}>
                 <Field
-                  className={newProductFormStyle.field}
+                  className={editProductFormStyle.field}
                   type="text"
                   name="stock"
                   placeholder="количество товара в наличии"
+                  title="Количество товара в наличии"
                 />
                 <ErrorMessage
-                  className={newProductFormStyle.error}
+                  className={editProductFormStyle.error}
                   name="stock"
                   component="div"
                 />
               </div>
-              <div className={[newProductFormStyle.fieldWrapper]}>
+              <div className={[editProductFormStyle.fieldWrapper]}>
                 <Field
-                  className={newProductFormStyle.field}
+                  className={editProductFormStyle.field}
                   type="text"
                   name="discount"
                   placeholder="размер скидки"
+                  title="Размер скидки"
                 />
                 <ErrorMessage
-                  className={newProductFormStyle.error}
+                  className={editProductFormStyle.error}
                   name="discount"
                   component="div"
                 />
               </div>
-              <div className={[newProductFormStyle.fieldWrapper]}>
+              <div className={[editProductFormStyle.fieldWrapper]}>
                 <Field
-                  className={newProductFormStyle.field}
+                  className={editProductFormStyle.field}
                   type="url"
                   name="pictures"
                   placeholder="ссылка на изображение товара"
+                  title="Ссылка на изображение товара"
                 />
                 <ErrorMessage
-                  className={newProductFormStyle.error}
+                  className={editProductFormStyle.error}
                   name="pictures"
                   component="div"
                 />
               </div>
-              <div className={[newProductFormStyle.fieldWrapper]}>
+              <div className={[editProductFormStyle.fieldWrapper]}>
                 <label>
                   <Field type="checkbox" name="available" />
                   Товар доступен
                 </label>
               </div>
               <button
-                className={classNames(newProductFormStyle.button, {
-                  [newProductFormStyle.disabled]: !isValid,
+                className={classNames(editProductFormStyle.button, {
+                  [editProductFormStyle.disabled]: !isValid,
                 })}
                 type="submit"
                 disabled={!isValid}
               >
-                Добавить товар
+                Сохранить изменения
               </button>
             </>
             )}
             {isLoading && (
-            <div className={newProductFormStyle.loader}>
+            <div className={editProductFormStyle.loader}>
               <Loader />
             </div>
             )}
             {isError && (
-            <div className={newProductFormStyle.errorMessage}>{error.message}</div>
+            <div className={editProductFormStyle.errorMessage}>{error.message}</div>
             )}
           </Form>
         );

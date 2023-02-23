@@ -11,6 +11,7 @@ import {
 } from '../../redux/slices/favouriteSlice';
 import { getTokenSelector } from '../../redux/slices/userSlice/tokenSlice';
 import { getUserIDSelector } from '../../redux/slices/userSlice/userIDSlice';
+import { EditProductForm } from '../EditProductForm/EditProductForm';
 import { Loader } from '../Loader/Loader';
 import { Modal } from '../Modal/Modal';
 import { ProductReviews } from '../ProductReviews/ProductReviews';
@@ -24,6 +25,7 @@ export function Detail() {
   const userID = useSelector(getUserIDSelector);
   const favourite = useSelector(getFavouriteSelector);
   const [isModalDeleteProductActive, setIsModalDeleteProductActive] = useState(false);
+  const [isModalEditProductActive, setIsModalEditProductActive] = useState(false);
   const dispatch = useDispatch();
   function likeHandler() {
     if (favourite.includes(id)) {
@@ -32,14 +34,17 @@ export function Detail() {
       dispatch(addToFavourite(id));
     }
   }
-  function editProductHandler() {
-    console.log('edit');
-  }
-  function closeModalHandler() {
+  function closeModalDeleteProductHandler() {
     setIsModalDeleteProductActive(false);
   }
-  function openModalHandler() {
+  function openModalDeleteProductHandler() {
     setIsModalDeleteProductActive(true);
+  }
+  function closeModalEditProductHandler() {
+    setIsModalEditProductActive(false);
+  }
+  function openModalEditProductHandler() {
+    setIsModalEditProductActive(true);
   }
   useEffect(() => {
     if (!token) {
@@ -47,7 +52,10 @@ export function Detail() {
     }
   }, [token]);
   const {
-    mutateAsync, isError: isErrorDelete, error: errorDelete, isLoading: isLoadingDelete,
+    mutateAsync,
+    isError: isErrorDelete,
+    error: errorDelete,
+    isLoading: isLoadingDelete,
   } = useMutation({
     mutationFn: () => dogFoodApi.deleteProductByID(token, id),
   });
@@ -68,10 +76,16 @@ export function Detail() {
   };
   if (isLoading || isFetching || isLoadingDelete) return <Loader />;
   if (isError || isErrorDelete) {
-    return <div className={detailStyle.errorMessage}>{error?.message || errorDelete.message}</div>;
+    return (
+      <div className={detailStyle.errorMessage}>
+        {error?.message || errorDelete.message}
+      </div>
+    );
   }
   function isCurrentUserAuthor() {
-    if (product.author['_id'] === userID) { return true; }
+    if (product.author['_id'] === userID) {
+      return true;
+    }
     return false;
   }
   return (
@@ -158,7 +172,7 @@ export function Detail() {
             type="button"
             className={detailStyle.button}
             title="Редактировать товар"
-            onClick={editProductHandler}
+            onClick={openModalEditProductHandler}
             disabled={!isCurrentUserAuthor()}
           >
             <i className="fa-solid fa-pen" />
@@ -167,7 +181,7 @@ export function Detail() {
             type="button"
             className={detailStyle.button}
             title="Удалить товар"
-            onClick={openModalHandler}
+            onClick={openModalDeleteProductHandler}
             disabled={!isCurrentUserAuthor()}
           >
             <i className="fa-solid fa-trash" />
@@ -178,14 +192,14 @@ export function Detail() {
       </div>
       <Modal
         isModalActive={isModalDeleteProductActive}
-        closeModalHandler={closeModalHandler}
+        closeModalHandler={closeModalDeleteProductHandler}
       >
         <div className={detailStyle.question}>
           Точно удалить этот товар из каталога?
         </div>
         <div className={detailStyle.buttonsModalWrapper}>
           <button
-            onClick={closeModalHandler}
+            onClick={closeModalDeleteProductHandler}
             className={detailStyle.buttonCancel}
             type="button"
           >
@@ -199,6 +213,16 @@ export function Detail() {
             Удалить
           </button>
         </div>
+      </Modal>
+      <Modal
+        isModalActive={isModalEditProductActive}
+        closeModalHandler={closeModalEditProductHandler}
+        product={product}
+      >
+        <EditProductForm
+          setIsModalEditProductActive={setIsModalEditProductActive}
+          product={product}
+        />
       </Modal>
     </>
   );

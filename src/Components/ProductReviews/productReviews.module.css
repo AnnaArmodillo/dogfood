@@ -76,3 +76,7 @@ input + label > i:hover {
   color: rgb(124, 20, 41);
   margin: 20px auto;
 }
+
+.loader {
+  margin: -100px auto;
+}

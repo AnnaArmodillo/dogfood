@@ -185,6 +185,23 @@ class DogFoodApi {
     }
     return res.json();
   }
+
+  async editProductByID(values, id, token) {
+    this.checkToken(token);
+    console.log('edit');
+    const res = await fetch(`${this.baseURL}/products/${id}`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this.getAuthorizationToken(token),
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(values),
+    });
+    if (res.status >= 300) {
+      throw new Error(`Ошибка, код ${res.status}`);
+    }
+    return res.json();
+  }
 }
 
 export const dogFoodApi = new DogFoodApi({

@@ -31,7 +31,9 @@ function ModalInner({ closeModalHandler, children }) {
   );
 }
 
-export function Modal({ isModalActive, closeModalHandler, children }) {
+export function Modal({
+  isModalActive, closeModalHandler, children,
+}) {
   function closeModalByClickWrapper(event) {
     if (event.target === event.currentTarget) {
       closeModalHandler();
