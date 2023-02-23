@@ -1,0 +1,68 @@
+.form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 700px;
+  gap: 8px;
+  padding: 20px;
+}
+
+.field {
+  line-height: 32px;
+  text-align: center;
+  padding: 4px;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 300px;
+  margin: 0 auto;
+}
+
+.error {
+  color: rgb(180, 61, 61);
+  font-size: 20px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.button {
+  margin: 0 auto;
+  border-radius: 32px;
+  font-size: 24px;
+  cursor: pointer;
+  line-height: 32px;
+  padding: 12px;
+  background-color: rgb(250, 228, 105);
+  font-weight: 600;
+  border: none;
+  transition: all 0.5s ease;
+  grid-column: 1 / span 2;
+}
+
+.disabled {
+  cursor: auto;
+}
+
+.button:hover:not([disabled]) {
+  font-size: 28px;
+  box-shadow: 4px 4px 2px rgb(189, 165, 33);
+}
+
+.fieldWrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  height: 100px;
+}
+
+.errorMessage {
+  font-size: 32px;
+  font-weight: 500;
+  color: rgb(124, 20, 41);
+  margin: 0 auto;
+  grid-column: 1 / span 2;
+}
+
+.loader {
+  grid-column: 1 / span 2;
+  margin: 0 auto;
+}

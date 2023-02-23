@@ -149,7 +149,7 @@ export function ProductReviews({ reviews }) {
           }}
         </Formik>
       )}
-      {isLoading && <Loader />}
+      {isLoading && (<div className={productReviewsStyle.loader}><Loader /></div>)}
       {isError && (<div className={productReviewsStyle.errorMessage}>{error.message}</div>)}
       <ul className={productReviewsStyle.reviews}>
         {reviews.map((review) => (

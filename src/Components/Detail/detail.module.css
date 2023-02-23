@@ -101,3 +101,32 @@
   cursor: auto;
   background-color: black;
 }
+
+.question {
+  margin: 40px auto 20px;
+  text-align: center;
+}
+
+.buttonCancel, .buttonClear {
+  background-color: rgb(250, 228, 105);
+  font-size: 24px;
+  border-radius: 16px;
+  padding: 8px;
+  cursor: pointer;
+  margin-bottom: 16px;
+  text-align: center;
+  font-weight: 600;
+  border: none;
+  transition: all 0.5s ease;
+}
+
+.buttonsModalWrapper {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 20px;
+}
+
+.buttonClear:hover,
+.buttonCancel:hover {
+  box-shadow: 4px 4px 2px rgb(189, 165, 33);
+}

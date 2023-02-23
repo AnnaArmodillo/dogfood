@@ -62,6 +62,7 @@ function ProductsInner() {
     isLoading,
     isError,
     error,
+    isFetching,
   } = useQuery({
     queryKey: getQueryKey(search),
     queryFn: () => dogFoodApi.getAllProducts(search, token),
@@ -76,6 +77,7 @@ function ProductsInner() {
     <>
       <Search />
       <Filters />
+      {isFetching && (<Loader />)}
       {products[0] && (
         <div className={productsStyle.products}>
           {sortedProducts.map((product) => (
