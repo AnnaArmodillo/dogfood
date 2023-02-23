@@ -20,7 +20,6 @@ import {
 } from '../Filters/constants';
 
 function ProductsInner() {
-  console.log('render products');
   const navigate = useNavigate();
   const token = useSelector(getTokenSelector);
   const search = useSelector(getSearchSelector);

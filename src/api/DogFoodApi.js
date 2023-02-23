@@ -188,7 +188,6 @@ class DogFoodApi {
 
   async editProductByID(values, id, token) {
     this.checkToken(token);
-    console.log('edit');
     const res = await fetch(`${this.baseURL}/products/${id}`, {
       method: 'PATCH',
       headers: {

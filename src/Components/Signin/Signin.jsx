@@ -72,7 +72,6 @@ function SigninInner({ mutateAsync }) {
 }
 const SigninWithQuery = withQuery(SigninInner);
 function Signin() {
-  console.log('render signin');
   const dispatch = useDispatch();
   const {
     mutateAsync, isError, error, isLoading,

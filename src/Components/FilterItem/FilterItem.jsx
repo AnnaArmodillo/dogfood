@@ -1,11 +1,13 @@
 import classNames from 'classnames';
+import { useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
+import { getSearchFilterSelector } from '../../redux/slices/filterSlice';
 import filterItemStyle from './filterItem.module.css';
 
 export function FilterItem({ filterName, clickFilterHandler }) {
   const [searchParams] = useSearchParams();
-  const currentFilterName = searchParams.get('filterName');
-  console.log(currentFilterName);
+  const filterFromRedux = useSelector(getSearchFilterSelector);
+  const currentFilterName = searchParams.get('filterName') ?? filterFromRedux;
   return (
     <button
       onClick={() => clickFilterHandler(filterName)}

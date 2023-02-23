@@ -1,25 +1,35 @@
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import { useDebounce } from '../../hooks/useDebounce';
-import { changeSearchValue } from '../../redux/slices/filterSlice';
+import { changeSearchValue, getSearchSelector } from '../../redux/slices/filterSlice';
 import searchStyle from './search.module.css';
 
 export function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const searchFromRedux = useSelector(getSearchSelector);
   const [search, setSearch] = useState(() => {
     const searchValueFromQuery = searchParams.get('q');
-    return searchValueFromQuery ?? '';
+    return searchValueFromQuery ?? searchFromRedux;
   });
+  useEffect(() => {
+    if (search === '') {
+      searchParams.delete('q');
+      setSearchParams(searchParams);
+    } else {
+      setSearchParams({
+        ...Object.fromEntries(searchParams.entries()),
+        q: search,
+      });
+    }
+  }, [search, searchParams]);
   const dispatch = useDispatch();
   const debouncedSearchValue = useDebounce(search, 1000);
   function clearSearchHandler() {
     setSearch('');
-    setSearchParams({
-      ...Object.fromEntries(searchParams.entries()),
-      q: '',
-    });
+    searchParams.delete('q');
+    setSearchParams(searchParams);
   }
   function changeSearchHandler(event) {
     const newSearchValue = event.target.value;

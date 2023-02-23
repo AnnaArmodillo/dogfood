@@ -65,7 +65,6 @@ function FavouriteInner() {
     </div>
   );
 }
-
 const FavouriteScrollToTop = scrollToTop(FavouriteInner);
 export function Favourite() {
   return (

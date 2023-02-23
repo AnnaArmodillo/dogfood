@@ -79,7 +79,6 @@ function SignupInner({ mutateAsync }) {
 }
 const SignupWithQuery = withQuery(SignupInner);
 export function Signup() {
-  console.log('render signup');
   const {
     mutateAsync, isError, error, isLoading,
   } = useMutation({

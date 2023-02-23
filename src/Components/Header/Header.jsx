@@ -9,7 +9,6 @@ import logo from '../logo.jpg';
 import headerStyle from './header.module.css';
 
 export function Header() {
-  console.log('render header');
   const dispatch = useDispatch();
   const token = useSelector(getTokenSelector);
   const cart = useSelector(getCartSelector);
