@@ -21,6 +21,9 @@ export function useActions() {
     dispatch(checkProduct(id));
   }
   return {
-    deleteHandler, quantityIncreaseHandler, quantityReduceHandler, checkProductHandler,
+    deleteHandler,
+    quantityIncreaseHandler,
+    quantityReduceHandler,
+    checkProductHandler,
   };
 }

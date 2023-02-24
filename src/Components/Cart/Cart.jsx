@@ -5,6 +5,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { dogFoodApi } from '../../api/DogFoodApi';
 import {
   checkAllProducts,
+  deleteProduct,
   getCartSelector,
   uncheckAllProducts,
 } from '../../redux/slices/cartSlice';
@@ -68,6 +69,13 @@ function CartInner() {
         * product.count;
     return totalCost;
   });
+  if (products.find((product) => !product['_id'])) {
+    cart.forEach((cartProduct) => {
+      if (!products.find((product) => cartProduct.id === product['_id'])) {
+        dispatch(deleteProduct(cartProduct.id));
+      }
+    });
+  }
   if (!cart.length) {
     return (
       <div className={cartStyle.emptyCartBlock}>
@@ -95,6 +103,13 @@ function CartInner() {
       </div>
     );
   }
+  if (products.find((product) => !product['_id'])) {
+    cart.forEach((cartProduct) => {
+      if (!products.find((product) => cartProduct.id === product['_id'])) {
+        setTimeout(() => dispatch(deleteProduct(cartProduct.id)));
+      }
+    });
+  }
   return (
     <div className={cartStyle.cart}>
       <div className={cartStyle.productsWrapper}>
@@ -107,7 +122,7 @@ function CartInner() {
           Выбрать все
         </label>
         <div className={cartStyle.products}>
-          {products.map((product) => (
+          {products.filter((product) => !!product['_id']).map((product) => (
             <CartItem
               key={product['_id']}
               title={product.name}

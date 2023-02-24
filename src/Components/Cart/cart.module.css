@@ -83,3 +83,11 @@
   color: rgb(14, 14, 160);
   font-size: 24px;
 }
+
+.deleteButton {
+  text-align: center;
+  background-color: white;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}

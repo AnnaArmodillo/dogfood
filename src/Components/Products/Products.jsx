@@ -24,33 +24,26 @@ function ProductsInner() {
   const token = useSelector(getTokenSelector);
   const search = useSelector(getSearchSelector);
   const filterName = useSelector(getSearchFilterSelector);
-  let sortedProducts = [];
-  function sortProducts(products) {
+  const sortedProducts = (products) => {
     switch (filterName) {
       case NEW:
-        sortedProducts = products.sort(
+        return products.sort(
           (a, b) => Date.parse(b.created_at) - Date.parse(a.created_at),
         );
-        break;
       case OLD:
-        sortedProducts = products.sort(
+        return products.sort(
           (a, b) => Date.parse(a.created_at) - Date.parse(b.created_at),
         );
-        break;
       case SALES:
-        sortedProducts = products.filter((product) => product.discount);
-        break;
+        return products.filter((product) => product.discount);
       case CHEAP:
-        sortedProducts = products.sort((a, b) => a.price - b.price);
-        break;
+        return products.sort((a, b) => a.price - b.price);
       case EXPENSIVE:
-        sortedProducts = products.sort((a, b) => b.price - a.price);
-        break;
+        return products.sort((a, b) => b.price - a.price);
       default:
-        sortedProducts = products;
-        break;
+        return products;
     }
-  }
+  };
   useEffect(() => {
     if (!token) {
       navigate('/signin');
@@ -71,7 +64,6 @@ function ProductsInner() {
   if (isError) {
     return <div className={productsStyle.errorMessage}>{error.message}</div>;
   }
-  sortProducts([...products]);
   return (
     <>
       <Search />
@@ -79,7 +71,7 @@ function ProductsInner() {
       {isFetching && (<Loader />)}
       {products[0] && (
         <div className={productsStyle.products}>
-          {sortedProducts.map((product) => (
+          {sortedProducts([...products]).map((product) => (
             <ProductItem
               key={product['_id']}
               id={product['_id']}
@@ -94,7 +86,7 @@ function ProductsInner() {
           ))}
         </div>
       )}
-      {!sortedProducts[0] && products && (
+      {!sortedProducts([...products])[0] && products && (
         <div className={productsStyle.emptyList}>
           По Вашему запросу ничего не найдено
         </div>
