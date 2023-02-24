@@ -1,14 +1,16 @@
-// eslint-disable-next-line no-unused-vars
 import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { dogFoodApi } from '../../api/DogFoodApi';
-import { getFavouriteSelector } from '../../redux/slices/favouriteSlice';
+import {
+  getFavouriteSelector,
+} from '../../redux/slices/favouriteSlice';
 import { getTokenSelector } from '../../redux/slices/userSlice/tokenSlice';
 import { FavouriteItem } from '../FavouriteItem/FavouriteItem';
 import { scrollToTop } from '../HOCs/scrollToTop';
 import { Loader } from '../Loader/Loader';
+import { UnknownFavouriteProduct } from '../UnknownFavouriteProduct/UnknownFavouriteProduct';
 import favouriteStyle from './favourite.module.css';
 
 function FavouriteInner() {
@@ -45,9 +47,16 @@ function FavouriteInner() {
       </div>
     );
   }
+  // if (products.find((product) => !product['_id'])) {
+  //   favourite.forEach((favouriteProduct) => {
+  //     if (!products.find((product) => favouriteProduct === product['_id'])) {
+  //       setTimeout(() => dispatch(deleteFromFavourite(favouriteProduct)));
+  //     }
+  //   });
+  // }
   return (
     <div className={favouriteStyle.favourite}>
-      {products.map((product) => (
+      {products.filter((product) => !!product['_id']).map((product) => (
         <FavouriteItem
           key={product['_id']}
           title={product.name}
@@ -61,6 +70,16 @@ function FavouriteInner() {
           reviews={product.reviews}
         />
       ))}
+      {favourite
+        .filter(
+          (favouriteProduct) => !products.find((product) => favouriteProduct === product['_id']),
+        )
+        .map((product) => (
+          <UnknownFavouriteProduct
+            key={product}
+            id={product}
+          />
+        ))}
       {isFetching && <Loader />}
     </div>
   );
