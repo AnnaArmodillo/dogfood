@@ -58,7 +58,10 @@ function CartInner() {
   if (isError) {
     return <div className={cartStyle.errorMessage}>{error.message}</div>;
   }
-  const checkedProducts = cart.filter((product) => product.isChecked);
+  const checkedProducts = cart
+    .filter((product) => product.isChecked)
+    .filter((cartProduct) => products.find((product) => cartProduct.id === product['_id']));
+  console.log(checkedProducts);
   const totalCount = checkedProducts.reduce((acc, el) => acc + el.count, 0);
   let totalCost = 0;
   checkedProducts.map((product) => {
