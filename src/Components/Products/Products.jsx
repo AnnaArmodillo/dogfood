@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { dogFoodApi } from '../../api/DogFoodApi';
@@ -22,8 +22,11 @@ import {
 function ProductsInner() {
   const navigate = useNavigate();
   const token = useSelector(getTokenSelector);
+  const [searchParams] = useSearchParams();
   const search = useSelector(getSearchSelector);
-  const filterName = useSelector(getSearchFilterSelector);
+  const filterFromRedux = useSelector(getSearchFilterSelector);
+  const filterName = searchParams.get('filterName') ?? filterFromRedux;
+  console.log(filterName);
   const sortedProducts = (products) => {
     switch (filterName) {
       case NEW:
