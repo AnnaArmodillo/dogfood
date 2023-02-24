@@ -5,7 +5,6 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { dogFoodApi } from '../../api/DogFoodApi';
 import {
   checkAllProducts,
-  deleteProduct,
   getCartSelector,
   uncheckAllProducts,
 } from '../../redux/slices/cartSlice';
@@ -13,6 +12,7 @@ import { getTokenSelector } from '../../redux/slices/userSlice/tokenSlice';
 import { CartItem } from '../CartItem/CartItem';
 import { scrollToTop } from '../HOCs/scrollToTop';
 import { Loader } from '../Loader/Loader';
+import { UnknownProduct } from '../UnknownProduct/UnknownProduct';
 import cartStyle from './cart.module.css';
 
 function CartInner() {
@@ -64,18 +64,11 @@ function CartInner() {
   checkedProducts.map((product) => {
     const checkedProduct = products.find((el) => product.id === el['_id']);
     totalCost
-        += checkedProduct.price
-        * (1 - checkedProduct.discount / 100)
-        * product.count;
+      += checkedProduct.price
+      * (1 - checkedProduct.discount / 100)
+      * product.count;
     return totalCost;
   });
-  if (products.find((product) => !product['_id'])) {
-    cart.forEach((cartProduct) => {
-      if (!products.find((product) => cartProduct.id === product['_id'])) {
-        dispatch(deleteProduct(cartProduct.id));
-      }
-    });
-  }
   if (!cart.length) {
     return (
       <div className={cartStyle.emptyCartBlock}>
@@ -103,13 +96,6 @@ function CartInner() {
       </div>
     );
   }
-  if (products.find((product) => !product['_id'])) {
-    cart.forEach((cartProduct) => {
-      if (!products.find((product) => cartProduct.id === product['_id'])) {
-        setTimeout(() => dispatch(deleteProduct(cartProduct.id)));
-      }
-    });
-  }
   return (
     <div className={cartStyle.cart}>
       <div className={cartStyle.productsWrapper}>
@@ -122,18 +108,30 @@ function CartInner() {
           Выбрать все
         </label>
         <div className={cartStyle.products}>
-          {products.filter((product) => !!product['_id']).map((product) => (
-            <CartItem
-              key={product['_id']}
-              title={product.name}
-              photo={product.pictures}
-              price={product.price}
-              wight={product.wight}
-              discount={product.discount}
-              id={product['_id']}
-              stock={product.stock}
-            />
-          ))}
+          {products
+            .filter((product) => !!product['_id'])
+            .map((product) => (
+              <CartItem
+                key={product['_id']}
+                title={product.name}
+                photo={product.pictures}
+                price={product.price}
+                wight={product.wight}
+                discount={product.discount}
+                id={product['_id']}
+                stock={product.stock}
+              />
+            ))}
+          {cart
+            .filter(
+              (cartProduct) => !products.find((product) => cartProduct.id === product['_id']),
+            )
+            .map((product) => (
+              <UnknownProduct
+                key={product.id}
+                id={product.id}
+              />
+            ))}
         </div>
         {isFetching && <Loader />}
       </div>
@@ -163,7 +161,5 @@ function CartInner() {
 }
 const CartScrollToTop = scrollToTop(CartInner);
 export function Cart() {
-  return (
-    <CartScrollToTop />
-  );
+  return <CartScrollToTop />;
 }

@@ -1,0 +1,27 @@
+.card {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 36px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.deleteButton {
+  text-align: center;
+  background-color: white;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.image {
+  font-size: 60px;
+  width: 20%;
+}

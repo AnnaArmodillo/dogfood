@@ -1,0 +1,26 @@
+.card {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 60px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.image {
+  font-size: 60px;
+  width: 20%;
+}
+
+.like {
+  color: red;
+  font-size: 24px;
+  position: relative;
+  cursor: pointer;
+}
