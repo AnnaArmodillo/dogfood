@@ -79,7 +79,7 @@ const router = createBrowserRouter([
       },
     ],
   },
-]);
+], { basename: '/dogfood' });
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
