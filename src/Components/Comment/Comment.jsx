@@ -15,6 +15,7 @@ export function Comment({ review }) {
           {' '}
           {review.author['_id']}
           ,
+          {' '}
           {formattedCreatedAt}
           {formattedCreatedAt !== formattedUpdatedAt && (
             <div>

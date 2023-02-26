@@ -26,7 +26,6 @@ function ProductsInner() {
   const search = useSelector(getSearchSelector);
   const filterFromRedux = useSelector(getSearchFilterSelector);
   const filterName = searchParams.get('filterName') ?? filterFromRedux;
-  console.log(filterName);
   const sortedProducts = (products) => {
     switch (filterName) {
       case NEW:

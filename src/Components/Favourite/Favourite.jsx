@@ -29,7 +29,7 @@ function FavouriteInner() {
     error,
     isFetching,
   } = useQuery({
-    queryKey: ['favourite'],
+    queryKey: ['favourite', favourite],
     queryFn: () => dogFoodApi.getProductsByIDs(
       favourite.map((product) => product),
       token,

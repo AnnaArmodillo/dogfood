@@ -14,6 +14,7 @@ import { scrollToTop } from '../HOCs/scrollToTop';
 import { Loader } from '../Loader/Loader';
 import { UnknownProduct } from '../UnknownProduct/UnknownProduct';
 import cartStyle from './cart.module.css';
+import { getQueryKey } from './helper';
 
 function CartInner() {
   const cart = useSelector(getCartSelector);
@@ -47,7 +48,7 @@ function CartInner() {
     error,
     isFetching,
   } = useQuery({
-    queryKey: ['cart'],
+    queryKey: getQueryKey(cart),
     queryFn: () => dogFoodApi.getProductsByIDs(
       cart.map((product) => product.id),
       token,
@@ -61,7 +62,6 @@ function CartInner() {
   const checkedProducts = cart
     .filter((product) => product.isChecked)
     .filter((cartProduct) => products.find((product) => cartProduct.id === product['_id']));
-  console.log(checkedProducts);
   const totalCount = checkedProducts.reduce((acc, el) => acc + el.count, 0);
   let totalCost = 0;
   checkedProducts.map((product) => {

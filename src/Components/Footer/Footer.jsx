@@ -1,7 +1,5 @@
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
-// eslint-disable-next-line no-unused-vars
-import React from 'react';
 import logo from '../logo.jpg';
 import footerStyle from './footer.module.css';
 

@@ -1,11 +1,16 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
 import { deleteFromFavourite } from '../../redux/slices/favouriteSlice';
 import unknownFavouriteProductStyle from './unknownFavouriteProduct.module.css';
 
 export function UnknownFavouriteProduct({ id }) {
   const dispatch = useDispatch();
+  const queryClient = useQueryClient();
   function deleteFromFavouriteHandler() {
     dispatch(deleteFromFavourite(id));
+    queryClient.invalidateQueries({
+      queryKey: ['favourite'],
+    });
   }
   return (
     <div className={unknownFavouriteProductStyle.card}>

@@ -1,11 +1,22 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addNewProduct, getCartSelector } from '../../redux/slices/cartSlice';
-import { deleteFromFavourite, getFavouriteSelector } from '../../redux/slices/favouriteSlice';
+import {
+  deleteFromFavourite,
+  getFavouriteSelector,
+} from '../../redux/slices/favouriteSlice';
 import favouriteItemStyle from './favouriteItem.module.css';
 
 export function FavouriteItem({
-  title, photo, price, wight, discount, id, stock, tags, reviews,
+  title,
+  photo,
+  price,
+  wight,
+  discount,
+  id,
+  stock,
+  tags,
+  reviews,
 }) {
   const dispatch = useDispatch();
   const favourite = useSelector(getFavouriteSelector);
@@ -25,7 +36,12 @@ export function FavouriteItem({
         />
       </div>
       <div className={favouriteItemStyle.info}>
-        <Link to={`/products/${id}`} className={favouriteItemStyle.title}>{title}</Link>
+        <Link
+          to={`/products/${id}`}
+          className={favouriteItemStyle.title}
+        >
+          {title}
+        </Link>
         <div className={favouriteItemStyle.wight}>{wight}</div>
         {tags.includes('new') ? (
           <div className={favouriteItemStyle.new}>Новинка</div>
@@ -49,17 +65,13 @@ export function FavouriteItem({
             {' '}
             шт.
           </div>
-        ) : (
-          <div>
-            Нет в наличии
-          </div>
-        )}
+        ) : <div>Нет в наличии</div>}
         <div>
           Отзывов:
           {' '}
           {reviews.length}
         </div>
-        {(cart.findIndex((item) => item.id === id)) < 0 ? (
+        {cart.findIndex((item) => item.id === id) < 0 ? (
           <button
             onClick={() => dispatch(addNewProduct(id))}
             className={favouriteItemStyle.button}
@@ -68,7 +80,11 @@ export function FavouriteItem({
           >
             <i className="fa-solid fa-cart-shopping" />
           </button>
-        ) : (<div>Этот товар уже есть в Вашей корзине</div>)}
+        ) : (
+          <div className={favouriteItemStyle.cartText}>
+            Этот товар уже есть в Вашей корзине
+          </div>
+        )}
       </div>
       <div className={favouriteItemStyle.priceWrapper}>
         <div className={favouriteItemStyle.totalPrice}>
@@ -84,8 +100,14 @@ export function FavouriteItem({
           </div>
         ) : null}
       </div>
-      <div className={favouriteItemStyle.like} onClick={likeHandler}>
-        <i className="fa-solid fa-heart" title="Удалить из избранного" />
+      <div
+        className={favouriteItemStyle.like}
+        onClick={likeHandler}
+      >
+        <i
+          className="fa-solid fa-heart"
+          title="Удалить из избранного"
+        />
       </div>
     </div>
   );

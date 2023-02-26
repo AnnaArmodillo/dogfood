@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import {
   Formik, Form, Field, ErrorMessage,
 } from 'formik';
