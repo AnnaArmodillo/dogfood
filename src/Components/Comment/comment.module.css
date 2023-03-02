@@ -37,3 +37,19 @@
 .product:hover {
   color: rgb(14, 14, 160);
 }
+
+.button {
+  background-color: white;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  width: fit-content;
+  margin-top: 8px;
+}
+
+.errorMessage {
+  font-size: 32px;
+  font-weight: 500;
+  color: rgb(124, 20, 41);
+  margin: 20px auto;
+}

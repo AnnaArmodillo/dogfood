@@ -63,6 +63,7 @@
   border: 2px solid rgb(250, 228, 105);
   border-radius: 8px;
   padding: 4px;
+  justify-content: space-between;
 }
 
 .quantityButton {
@@ -84,6 +85,7 @@
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  width: 20%;
 }
 
 .price {

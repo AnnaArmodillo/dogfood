@@ -2,7 +2,6 @@ export const initState = {
   user: {
     token: '',
     userID: '',
-    group: 'sm9',
     email: '',
   },
   cart: [],

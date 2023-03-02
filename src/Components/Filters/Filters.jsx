@@ -4,12 +4,12 @@ import { useSearchParams } from 'react-router-dom';
 import { changeSearchFilterName, getSearchFilterSelector } from '../../redux/slices/filterSlice';
 import { FilterItem } from '../FilterItem/FilterItem';
 import {
-  CHEAP, EXPENSIVE, NEW, OLD, SALES,
+  CHEAP, EXPENSIVE, NEW, OLD, SALES, POPULAR,
 } from './constants';
 import FiltersStyle from './filters.module.css';
 
 export function Filters() {
-  const FILTERS = [NEW, OLD, SALES, CHEAP, EXPENSIVE];
+  const FILTERS = [NEW, OLD, SALES, CHEAP, EXPENSIVE, POPULAR];
   const [searchParams, setSearchParams] = useSearchParams();
   const filterFromRedux = useSelector(getSearchFilterSelector);
   const currentFilterName = searchParams.get('filterName') ?? filterFromRedux;

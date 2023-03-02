@@ -1,7 +1,7 @@
 .cart {
   margin: 100px 40px 20px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 .products {
@@ -22,6 +22,7 @@
 .productsWrapper {
   display: flex;
   flex-direction: column;
+  width: 70%;
 }
 
 .checkAll {

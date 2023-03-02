@@ -16,7 +16,7 @@ import { Filters } from '../Filters/Filters';
 import { Search } from '../Search/Search';
 import { scrollToTop } from '../HOCs/scrollToTop';
 import {
-  CHEAP, EXPENSIVE, NEW, OLD, SALES,
+  CHEAP, EXPENSIVE, NEW, OLD, POPULAR, SALES,
 } from '../Filters/constants';
 
 function ProductsInner() {
@@ -42,6 +42,8 @@ function ProductsInner() {
         return products.sort((a, b) => a.price - b.price);
       case EXPENSIVE:
         return products.sort((a, b) => b.price - a.price);
+      case POPULAR:
+        return products.sort((a, b) => b.likes.length - a.likes.length);
       default:
         return products;
     }
@@ -66,6 +68,7 @@ function ProductsInner() {
   if (isError) {
     return <div className={productsStyle.errorMessage}>{error.message}</div>;
   }
+  console.log(sortedProducts([...products]));
   return (
     <>
       <Search />

@@ -75,7 +75,7 @@ export function ProductReviews({ reviews }) {
                       value="1"
                     />
                     <label htmlFor="1">
-                      <i className="fa-solid fa-star" />
+                      <i className="fa-solid fa-star" title="1" />
                     </label>
                     <Field
                       type="radio"
@@ -84,7 +84,7 @@ export function ProductReviews({ reviews }) {
                       value="2"
                     />
                     <label htmlFor="2">
-                      <i className="fa-solid fa-star" />
+                      <i className="fa-solid fa-star" title="2" />
                     </label>
                     <Field
                       type="radio"
@@ -93,7 +93,7 @@ export function ProductReviews({ reviews }) {
                       value="3"
                     />
                     <label htmlFor="3">
-                      <i className="fa-solid fa-star" />
+                      <i className="fa-solid fa-star" title="3" />
                     </label>
                     <Field
                       type="radio"
@@ -102,7 +102,7 @@ export function ProductReviews({ reviews }) {
                       value="4"
                     />
                     <label htmlFor="4">
-                      <i className="fa-solid fa-star" />
+                      <i className="fa-solid fa-star" title="4" />
                     </label>
                     <Field
                       type="radio"
@@ -111,7 +111,7 @@ export function ProductReviews({ reviews }) {
                       value="5"
                     />
                     <label htmlFor="5">
-                      <i className="fa-solid fa-star" />
+                      <i className="fa-solid fa-star" title="5" />
                     </label>
                   </div>
                 </div>

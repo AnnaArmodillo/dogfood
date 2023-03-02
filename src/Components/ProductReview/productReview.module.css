@@ -1,23 +1,41 @@
 .review {
-    list-style: none;
-    text-align: left;
-    border: 2px solid rgb(189, 165, 33);
-    border-radius: 8px;
-    padding: 8px 8px 16px;
-    margin: 16px 0;
-    width: 100%;
+  list-style: none;
+  text-align: left;
+  border: 2px solid rgb(189, 165, 33);
+  border-radius: 8px;
+  padding: 8px 8px 16px;
+  margin: 16px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .date {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .top {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
 }
 
 .star {
-    color: rgb(250, 228, 105);
+  color: rgb(250, 228, 105);
+}
+
+.button {
+  background-color: white;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  width: fit-content;
+  margin-top: 8px;
+}
+
+.errorMessage {
+  font-size: 32px;
+  font-weight: 500;
+  color: rgb(124, 20, 41);
+  margin: 20px auto;
 }

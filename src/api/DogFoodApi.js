@@ -138,6 +138,21 @@ class DogFoodApi {
     return res.json();
   }
 
+  async deleteReview(token, productID, reviewID) {
+    this.checkToken(token);
+    const res = await fetch(`${this.baseURL}/products/review/${productID}/${reviewID}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this.getAuthorizationToken(token),
+        'Content-Type': 'application/json',
+      },
+    });
+    if (res.status >= 300) {
+      throw new Error(`Ошибка, код ${res.status}`);
+    }
+    return res.json();
+  }
+
   async getAllReviews(token) {
     this.checkToken(token);
     const res = await fetch(`${this.baseURL}/products/review/`, {
