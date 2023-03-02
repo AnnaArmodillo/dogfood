@@ -68,7 +68,6 @@ function ProductsInner() {
   if (isError) {
     return <div className={productsStyle.errorMessage}>{error.message}</div>;
   }
-  console.log(sortedProducts([...products]));
   return (
     <>
       <Search />
