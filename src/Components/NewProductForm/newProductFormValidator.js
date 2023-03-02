@@ -18,5 +18,6 @@ export const newProductFormValidationScheme = Yup.object({
     .max(100, 'Скидка не может превышать 100%')
     .required('Обязательное поле'),
   pictures: Yup.string()
+    .url('Требуется ссылка на изображение')
     .required('Обязательное поле'),
 });
