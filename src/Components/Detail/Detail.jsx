@@ -82,12 +82,6 @@ export function Detail() {
       </div>
     );
   }
-  function isCurrentUserAuthor() {
-    if (product.author['_id'] === userID) {
-      return true;
-    }
-    return false;
-  }
   return (
     <>
       <div className={detailStyle.card}>
@@ -168,24 +162,26 @@ export function Detail() {
               <div>Этот товар уже есть в Вашей корзине</div>
             )}
           </div>
-          <button
-            type="button"
-            className={detailStyle.button}
-            title="Редактировать товар"
-            onClick={openModalEditProductHandler}
-            disabled={!isCurrentUserAuthor()}
-          >
-            <i className="fa-solid fa-pen" />
-          </button>
-          <button
-            type="button"
-            className={detailStyle.button}
-            title="Удалить товар"
-            onClick={openModalDeleteProductHandler}
-            disabled={!isCurrentUserAuthor()}
-          >
-            <i className="fa-solid fa-trash" />
-          </button>
+          {(product.author['_id'] === userID) && (
+            <>
+              <button
+                type="button"
+                className={detailStyle.button}
+                title="Редактировать товар"
+                onClick={openModalEditProductHandler}
+              >
+                <i className="fa-solid fa-pen" />
+              </button>
+              <button
+                type="button"
+                className={detailStyle.button}
+                title="Удалить товар"
+                onClick={openModalDeleteProductHandler}
+              >
+                <i className="fa-solid fa-trash" />
+              </button>
+            </>
+          )}
         </div>
         <div className={detailStyle.description}>{product.description}</div>
         <ProductReviews reviews={product.reviews} />

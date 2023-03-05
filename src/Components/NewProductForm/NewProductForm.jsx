@@ -1,17 +1,21 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import classNames from 'classnames';
 import {
   ErrorMessage, Field, Form, Formik,
 } from 'formik';
 import { useSelector } from 'react-redux';
 import { dogFoodApi } from '../../api/DogFoodApi';
+import { getSearchSelector } from '../../redux/slices/filterSlice';
 import { getTokenSelector } from '../../redux/slices/userSlice/tokenSlice';
 import { Loader } from '../Loader/Loader';
+import { getQueryKey } from '../Products/helper';
 import newProductFormStyle from './newProductForm.module.css';
 import { newProductFormValidationScheme } from './newProductFormValidator';
 
 export function NewProductForm({ setIsAddNewProductModalActive }) {
   const token = useSelector(getTokenSelector);
+  const search = useSelector(getSearchSelector);
+  const queryClient = useQueryClient();
   const {
     mutateAsync, isError, error, isLoading,
   } = useMutation({
@@ -20,6 +24,7 @@ export function NewProductForm({ setIsAddNewProductModalActive }) {
   const submitHandler = async (values) => {
     await mutateAsync(values);
     setIsAddNewProductModalActive(false);
+    queryClient.invalidateQueries(getQueryKey(search));
   };
   return (
     <Formik

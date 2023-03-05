@@ -7,8 +7,9 @@ import { getTokenSelector } from '../../redux/slices/userSlice/tokenSlice';
 import { Loader } from '../Loader/Loader';
 import { Comment } from '../Comment/Comment';
 import commentsStyle from './comments.module.css';
+import { scrollToTop } from '../HOCs/scrollToTop';
 
-export function Comments() {
+function CommentsInner() {
   const token = useSelector(getTokenSelector);
   const navigate = useNavigate();
   useEffect(() => {
@@ -21,12 +22,13 @@ export function Comments() {
     isLoading,
     isError,
     error,
+    isFetching,
   } = useQuery({
     queryKey: ['allReviews'],
     queryFn: () => dogFoodApi.getAllReviews(token),
     enabled: !!token,
   });
-  if (isLoading) return <Loader />;
+  if (isLoading || isFetching) return <Loader />;
   if (isError) {
     return <div className={commentsStyle.errorMessage}>{error.message}</div>;
   }
@@ -41,4 +43,8 @@ export function Comments() {
       ))}
     </ul>
   );
+}
+const CommentsScrollToTop = scrollToTop(CommentsInner);
+export function Comments() {
+  return <CommentsScrollToTop />;
 }

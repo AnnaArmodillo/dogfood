@@ -17,3 +17,25 @@
   font-weight: 600;
   font-size: 40px;
 }
+
+.button {
+  margin: 40px auto;
+  border-radius: 32px;
+  font-size: 24px;
+  cursor: pointer;
+  line-height: 32px;
+  padding: 12px;
+  background-color: rgb(250, 228, 105);
+  font-weight: 600;
+  border: none;
+  transition: all 0.5s ease;
+}
+
+.disabled {
+  cursor: auto;
+}
+
+.button:hover:not([disabled]) {
+  font-size: 28px;
+  box-shadow: 4px 4px 2px rgb(189, 165, 33);
+}

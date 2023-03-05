@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { dogFoodApi } from '../../api/DogFoodApi';
 import { ProductItem } from '../ProductItem/ProductItem';
@@ -18,6 +18,8 @@ import { scrollToTop } from '../HOCs/scrollToTop';
 import {
   CHEAP, EXPENSIVE, NEW, OLD, POPULAR, SALES,
 } from '../Filters/constants';
+import { Modal } from '../Modal/Modal';
+import { NewProductForm } from '../NewProductForm/NewProductForm';
 
 function ProductsInner() {
   const navigate = useNavigate();
@@ -26,6 +28,13 @@ function ProductsInner() {
   const search = useSelector(getSearchSelector);
   const filterFromRedux = useSelector(getSearchFilterSelector);
   const filterName = searchParams.get('filterName') ?? filterFromRedux;
+  const [isAddNewProductModalActive, setIsAddNewProductModalActive] = useState(false);
+  function closeModalHandler() {
+    setIsAddNewProductModalActive(false);
+  }
+  function openModalHandler() {
+    setIsAddNewProductModalActive(true);
+  }
   const sortedProducts = (products) => {
     switch (filterName) {
       case NEW:
@@ -64,7 +73,7 @@ function ProductsInner() {
     queryFn: () => dogFoodApi.getAllProducts(search, token),
     enabled: !!token,
   });
-  if (isLoading) return <Loader />;
+  if (isLoading || isFetching) return <Loader />;
   if (isError) {
     return <div className={productsStyle.errorMessage}>{error.message}</div>;
   }
@@ -72,6 +81,19 @@ function ProductsInner() {
     <>
       <Search />
       <Filters />
+      <button
+        type="button"
+        onClick={openModalHandler}
+        className={productsStyle.button}
+      >
+        Добавить новый товар в каталог
+      </button>
+      <Modal
+        isModalActive={isAddNewProductModalActive}
+        closeModalHandler={closeModalHandler}
+      >
+        <NewProductForm setIsAddNewProductModalActive={setIsAddNewProductModalActive} />
+      </Modal>
       {isFetching && (<Loader />)}
       {products[0] && (
         <div className={productsStyle.products}>
